@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx creator="edooon" version="1.1">
+	<metadata>
+		<name>edooon gps</name>
+	</metadata>
+	<trk>
+		<name>edooon</name>
+		<trkseg>
+			<trkpt lat="32.021187" lon="118.764483">
+				<time>2014-08-10T01:07:00.000Z</time>
+			</trkpt>
+			<trkpt lat="32.021187" lon="118.764483">
+				<time>2014-08-10T23:07:00.000Z</time>
+			</trkpt>
+		</trkseg>
+	</trk>
+</gpx>
