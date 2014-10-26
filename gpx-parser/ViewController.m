@@ -16,7 +16,7 @@
     [super viewDidLoad];
     NSLog(@"Start");
 //    NSString* path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"gpx"];
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"xml"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"gpx"];
     NSLog(@"path＝%@", path);
     // Do any additional setup after loading the view.
 
@@ -24,6 +24,7 @@
 
     GPXParser *gpxParser = [[GPXParser alloc] initWithData:data];
     [gpxParser printAllElements];
+
 }
 
 - (void)setRepresentedObject:(id)representedObject {

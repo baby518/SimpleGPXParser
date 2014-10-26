@@ -8,9 +8,11 @@
 		<trkseg>
 			<trkpt lat="32.021187" lon="118.764483">
 				<time>2014-08-10T01:07:00.000Z</time>
+                <ele>31.171794</ele>
 			</trkpt>
 			<trkpt lat="32.021187" lon="118.764483">
 				<time>2014-08-10T23:07:00.000Z</time>
+                <ele>25.236124</ele>
 			</trkpt>
 		</trkseg>
 	</trk>

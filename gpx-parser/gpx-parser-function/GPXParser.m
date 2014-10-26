@@ -13,6 +13,7 @@
 - (GPXParser *)initWithData:(NSData *)data {
     self = [super self];
     if (self) {
+        mXMLData = data;
         mXMLDoc = [[GDataXMLDocument alloc] initWithData:data options:0 error:nil];
         mRootElement = [mXMLDoc rootElement];
     }
@@ -23,24 +24,34 @@
     if (mRootElement == nil) {
         NSLog(@"Root Element is not found !!!");
         return;
+    } else if (![[mRootElement name] isEqualToString:ROOT_NAME]) {
+        NSLog(@"This xml file's ROOT is %@", [mRootElement name]);
+        NSLog(@"This xml file seems isn't a gpx file !!!");
+        return;
     }
-    //获取根节点下的节点（ User ）
-    NSArray *users = [mRootElement elementsForName:@"User"];
 
-    for (GDataXMLElement *user in users) {
-        //User节点的 id 属性
-        NSString *userId = [[user attributeForName:@"id"] stringValue];
-        NSLog(@"User id is:%@", userId);
+    NSLog(@"-------------------");
+    NSLog(@"This xml file's CREATOR is %@", [[mRootElement attributeForName:ATTRIBUTE_ROOT_CREATOR] stringValue]);
+    NSLog(@"This xml file's VERSION is %@", [[mRootElement attributeForName:ATTRIBUTE_ROOT_VERSION] stringValue]);
 
+    //获取根节点下的节点（ trk ）
+    NSArray *tracks = [mRootElement elementsForName:ELEMENT_TRACK];
+
+    for (GDataXMLElement *track in tracks) {
         //获取 name 节点的值
-        GDataXMLElement *nameElement = [[user elementsForName:@"name"] objectAtIndex:0];
-        NSString *name = [nameElement stringValue];
-        NSLog(@"User name is:%@", name);
+        NSString *name = [[[track elementsForName:ELEMENT_NAME] objectAtIndex:0] stringValue];
+        NSLog(@"track name is:%@", name);
 
-        //获取 age 节点的值
-        GDataXMLElement *ageElement = [[user elementsForName:@"age"] objectAtIndex:0];
-        NSString *age = [ageElement stringValue];
-        NSLog(@"User age is:%@", age);
+        //获取 trkseg 节点
+        GDataXMLElement *trksegElement = [[track elementsForName:ELEMENT_TRACK_SEGMENT] objectAtIndex:0];
+        NSArray *trackPoints = [trksegElement elementsForName:ELEMENT_TRACK_POINT];
+        for (GDataXMLElement *point in trackPoints) {
+            NSString *lat = [[point attributeForName:ATTRIBUTE_TRACK_POINT_LATITUDE] stringValue];
+            NSString *lon = [[point attributeForName:ATTRIBUTE_TRACK_POINT_LONGITUDE] stringValue];
+            NSString *time = [[[point elementsForName:ELEMENT_TRACK_POINT_TIME] objectAtIndex:0] stringValue];
+            NSString *ele = [[[point elementsForName:ELEMENT_TRACK_POINT_ELEVATION] objectAtIndex:0] stringValue];
+            NSLog(@"track Point is: (%@, %@), Time is: %@, Elevation is: %@.", lat, lon, time, ele);
+        }
         NSLog(@"-------------------");
     }
 }

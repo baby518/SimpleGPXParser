@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "GDataXMLNode.h"
+#import "GPXSchema.h"
 
 /** @author zhangchao
  *  @since 2014-8-18
- *  @data 2014-8-18
+ *  @data 2014-10-26
  *  @brief used for parse the gpx file.*/
 @interface GPXParser : NSObject {
 @protected
