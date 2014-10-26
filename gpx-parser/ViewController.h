@@ -9,7 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ViewController : NSViewController
+- (IBAction)openFileButtonPressed:(NSButton *)sender;
 
-
+- (NSString *)getFilePathFromDialog;
+- (NSData *)loadDataFromFile:(NSString *)path;
 @end
 

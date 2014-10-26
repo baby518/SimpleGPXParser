@@ -14,7 +14,6 @@
 		D4D40DC0199FBED90060F812 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D40DBF199FBED90060F812 /* Images.xcassets */; };
 		D4D40DC3199FBED90060F812 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4D40DC1199FBED90060F812 /* Main.storyboard */; };
 		D4D40DCF199FBED90060F812 /* gpx_parserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DCE199FBED90060F812 /* gpx_parserTests.m */; };
-		D4D40DE5199FC10E0060F812 /* sample.gpx in Resources */ = {isa = PBXBuildFile; fileRef = D4D40DE4199FC10E0060F812 /* sample.gpx */; };
 		D4D40DED199FC1730060F812 /* GPXParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DEC199FC1730060F812 /* GPXParser.m */; };
 		D4D40DF0199FC6330060F812 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DEF199FC6330060F812 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D4D40DF2199FC7800060F812 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D40DF1199FC7800060F812 /* libxml2.dylib */; };
@@ -45,7 +44,6 @@
 		D4D40DC8199FBED90060F812 /* gpx-parserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gpx-parserTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4D40DCD199FBED90060F812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4D40DCE199FBED90060F812 /* gpx_parserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gpx_parserTests.m; sourceTree = "<group>"; };
-		D4D40DE4199FC10E0060F812 /* sample.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sample.gpx; sourceTree = "<group>"; };
 		D4D40DEB199FC1730060F812 /* GPXParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXParser.h; sourceTree = "<group>"; };
 		D4D40DEC199FC1730060F812 /* GPXParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXParser.m; sourceTree = "<group>"; };
 		D4D40DEE199FC6330060F812 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
@@ -95,7 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				D4D40DEA199FC1730060F812 /* gpx-parser-function */,
-				D4D40DE3199FC10E0060F812 /* sample */,
 				D4D40DB9199FBED90060F812 /* ViewController.h */,
 				D4D40DBA199FBED90060F812 /* ViewController.m */,
 				D4D40DBC199FBED90060F812 /* AppDelegate.h */,
@@ -131,14 +128,6 @@
 				D4D40DCD199FBED90060F812 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D4D40DE3199FC10E0060F812 /* sample */ = {
-			isa = PBXGroup;
-			children = (
-				D4D40DE4199FC10E0060F812 /* sample.gpx */,
-			);
-			path = sample;
 			sourceTree = "<group>";
 		};
 		D4D40DEA199FC1730060F812 /* gpx-parser-function */ = {
@@ -234,7 +223,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4D40DE5199FC10E0060F812 /* sample.gpx in Resources */,
 				D4D40DC0199FBED90060F812 /* Images.xcassets in Resources */,
 				D4D40DC3199FBED90060F812 /* Main.storyboard in Resources */,
 			);

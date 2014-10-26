@@ -44,8 +44,10 @@
 
         //获取 trkseg 节点
         GDataXMLElement *trksegElement = [[track elementsForName:ELEMENT_TRACK_SEGMENT] objectAtIndex:0];
+        //获取 trkseg 节点下的 trkpt 节点
         NSArray *trackPoints = [trksegElement elementsForName:ELEMENT_TRACK_POINT];
         for (GDataXMLElement *point in trackPoints) {
+            //获取 trkpt 节点下的 lat 和 lon 属性, time 和 ele 节点
             NSString *lat = [[point attributeForName:ATTRIBUTE_TRACK_POINT_LATITUDE] stringValue];
             NSString *lon = [[point attributeForName:ATTRIBUTE_TRACK_POINT_LONGITUDE] stringValue];
             NSString *time = [[[point elementsForName:ELEMENT_TRACK_POINT_TIME] objectAtIndex:0] stringValue];
