@@ -7,8 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "GPXParser.h"
 
-@interface ViewController : NSViewController
+@interface ViewController : NSViewController <GPXParserDelegate>
+
+@property (weak) IBOutlet NSTextField *mPathTextField;
+@property (weak) IBOutlet NSTextField *mCreatorTextField;
+@property (weak) IBOutlet NSTextField *mVersionTextField;
+
 - (IBAction)openFileButtonPressed:(NSButton *)sender;
 
 - (NSString *)getFilePathFromDialog;

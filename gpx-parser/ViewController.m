@@ -7,10 +7,12 @@
 //
 
 #import "ViewController.h"
-#import "GDataXMLNode.h"
 #import "GPXParser.h"
 
 @implementation ViewController
+@synthesize mPathTextField;
+@synthesize mCreatorTextField;
+@synthesize mVersionTextField;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,11 +27,16 @@
     NSLog(@"Button CLicked.");
 
     NSString *path = [self getFilePathFromDialog];
+    if (path != nil) {
+        // show path in Text Field.
+        [mPathTextField setStringValue:path];
+    }
     NSData *data = [self loadDataFromFile:path];
 
     if (data != nil) {
         GPXParser *gpxParser = [[GPXParser alloc] initWithData:data];
-        [gpxParser printAllElements];
+        gpxParser.delegate = self;
+        [gpxParser parserAllElements];
     }
 }
 
@@ -72,5 +79,16 @@
 
     NSLog(@"getFilePathFromDialog Url: %@", result);
     return result;
+}
+
+
+- (void)rootCreatorDidParser:(NSString *)creator {
+    NSLog(@"rootCreatorDidParser from GPXParserDelegate. %@", creator);
+    [mCreatorTextField setStringValue:creator];
+}
+
+- (void)rootVersionDidParser:(NSString *)version {
+    NSLog(@"rootVersionDidParser from GPXParserDelegate. %@", version);
+    [mVersionTextField setStringValue:version];
 }
 @end

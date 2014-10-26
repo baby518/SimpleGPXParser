@@ -10,6 +10,8 @@
 
 @implementation GPXParser
 
+@synthesize delegate;
+
 - (GPXParser *)initWithData:(NSData *)data {
     self = [super self];
     if (self) {
@@ -20,7 +22,7 @@
     return self;
 }
 
-- (void)printAllElements {
+- (void)parserAllElements {
     if (mRootElement == nil) {
         NSLog(@"Root Element is not found !!!");
         return;
@@ -31,8 +33,13 @@
     }
 
     NSLog(@"-------------------");
-    NSLog(@"This xml file's CREATOR is %@", [[mRootElement attributeForName:ATTRIBUTE_ROOT_CREATOR] stringValue]);
-    NSLog(@"This xml file's VERSION is %@", [[mRootElement attributeForName:ATTRIBUTE_ROOT_VERSION] stringValue]);
+    NSString *creator = [[mRootElement attributeForName:ATTRIBUTE_ROOT_CREATOR] stringValue];
+    NSLog(@"This xml file's CREATOR is %@", creator);
+    [delegate rootCreatorDidParser:creator];
+
+    NSString *version = [[mRootElement attributeForName:ATTRIBUTE_ROOT_VERSION] stringValue];
+    NSLog(@"This xml file's VERSION is %@", version);
+    [delegate rootVersionDidParser:version];
 
     //获取根节点下的节点（ trk ）
     NSArray *tracks = [mRootElement elementsForName:ELEMENT_TRACK];

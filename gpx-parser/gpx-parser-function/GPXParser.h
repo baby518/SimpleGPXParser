@@ -11,6 +11,16 @@
 #import "GPXSchema.h"
 
 /** @author zhangchao
+*  @since 2014-10-27
+*  @data 2014-10-27
+*  @brief Delegate for View.*/
+@protocol GPXParserDelegate <NSObject>
+@optional
+- (void)rootCreatorDidParser:(NSString *)creator;
+- (void)rootVersionDidParser:(NSString *)version;
+@end
+
+/** @author zhangchao
  *  @since 2014-8-18
  *  @data 2014-10-26
  *  @brief used for parse the gpx file.*/
@@ -20,8 +30,9 @@
     GDataXMLDocument *mXMLDoc;
     GDataXMLElement *mRootElement;
 }
+@property (nonatomic, assign) id <GPXParserDelegate> delegate;
 
 - (GPXParser *)initWithData:(NSData *)data;
-- (void)printAllElements;
+- (void)parserAllElements;
 
 @end
