@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D42177A119FABD5C0000947A /* sample.xml in Resources */ = {isa = PBXBuildFile; fileRef = D42177A019FABD5C0000947A /* sample.xml */; };
 		D4D40DB8199FBED90060F812 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DB7199FBED90060F812 /* main.m */; };
 		D4D40DBB199FBED90060F812 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DBA199FBED90060F812 /* ViewController.m */; };
 		D4D40DBE199FBED90060F812 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DBD199FBED90060F812 /* AppDelegate.m */; };
@@ -14,7 +15,7 @@
 		D4D40DC3199FBED90060F812 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4D40DC1199FBED90060F812 /* Main.storyboard */; };
 		D4D40DCF199FBED90060F812 /* gpx_parserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DCE199FBED90060F812 /* gpx_parserTests.m */; };
 		D4D40DE5199FC10E0060F812 /* sample.gpx in Resources */ = {isa = PBXBuildFile; fileRef = D4D40DE4199FC10E0060F812 /* sample.gpx */; };
-		D4D40DED199FC1730060F812 /* gpx-parser.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DEC199FC1730060F812 /* gpx-parser.m */; };
+		D4D40DED199FC1730060F812 /* GPXParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DEC199FC1730060F812 /* GPXParser.m */; };
 		D4D40DF0199FC6330060F812 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DEF199FC6330060F812 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D4D40DF2199FC7800060F812 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D40DF1199FC7800060F812 /* libxml2.dylib */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D42177A019FABD5C0000947A /* sample.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = sample.xml; sourceTree = "<group>"; };
 		D4D40DB2199FBED90060F812 /* gpx-parser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gpx-parser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4D40DB6199FBED90060F812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4D40DB7199FBED90060F812 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -43,8 +45,8 @@
 		D4D40DCD199FBED90060F812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4D40DCE199FBED90060F812 /* gpx_parserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gpx_parserTests.m; sourceTree = "<group>"; };
 		D4D40DE4199FC10E0060F812 /* sample.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sample.gpx; sourceTree = "<group>"; };
-		D4D40DEB199FC1730060F812 /* gpx-parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "gpx-parser.h"; sourceTree = "<group>"; };
-		D4D40DEC199FC1730060F812 /* gpx-parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "gpx-parser.m"; sourceTree = "<group>"; };
+		D4D40DEB199FC1730060F812 /* GPXParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXParser.h; sourceTree = "<group>"; };
+		D4D40DEC199FC1730060F812 /* GPXParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXParser.m; sourceTree = "<group>"; };
 		D4D40DEE199FC6330060F812 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		D4D40DEF199FC6330060F812 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		D4D40DF1199FC7800060F812 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -133,6 +135,7 @@
 		D4D40DE3199FC10E0060F812 /* sample */ = {
 			isa = PBXGroup;
 			children = (
+				D42177A019FABD5C0000947A /* sample.xml */,
 				D4D40DE4199FC10E0060F812 /* sample.gpx */,
 			);
 			path = sample;
@@ -143,8 +146,8 @@
 			children = (
 				D4D40DEE199FC6330060F812 /* GDataXMLNode.h */,
 				D4D40DEF199FC6330060F812 /* GDataXMLNode.m */,
-				D4D40DEB199FC1730060F812 /* gpx-parser.h */,
-				D4D40DEC199FC1730060F812 /* gpx-parser.m */,
+				D4D40DEB199FC1730060F812 /* GPXParser.h */,
+				D4D40DEC199FC1730060F812 /* GPXParser.m */,
 			);
 			path = "gpx-parser-function";
 			sourceTree = "<group>";
@@ -229,9 +232,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D42177A119FABD5C0000947A /* sample.xml in Resources */,
+				D4D40DE5199FC10E0060F812 /* sample.gpx in Resources */,
 				D4D40DC0199FBED90060F812 /* Images.xcassets in Resources */,
 				D4D40DC3199FBED90060F812 /* Main.storyboard in Resources */,
-				D4D40DE5199FC10E0060F812 /* sample.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4D40DED199FC1730060F812 /* gpx-parser.m in Sources */,
+				D4D40DED199FC1730060F812 /* GPXParser.m in Sources */,
 				D4D40DBB199FBED90060F812 /* ViewController.m in Sources */,
 				D4D40DF0199FC6330060F812 /* GDataXMLNode.m in Sources */,
 				D4D40DB8199FBED90060F812 /* main.m in Sources */,
@@ -450,6 +454,7 @@
 				D4D40DD4199FBED90060F812 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D4D40DD5199FBED90060F812 /* Build configuration list for PBXNativeTarget "gpx-parserTests" */ = {
 			isa = XCConfigurationList;
@@ -458,6 +463,7 @@
 				D4D40DD7199FBED90060F812 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

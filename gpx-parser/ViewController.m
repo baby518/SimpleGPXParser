@@ -7,16 +7,23 @@
 //
 
 #import "ViewController.h"
+#import "GDataXMLNode.h"
+#import "GPXParser.h"
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"Start");
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"gpx"];
+//    NSString* path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"gpx"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"xml"];
     NSLog(@"path＝%@", path);
     // Do any additional setup after loading the view.
 
+    NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+
+    GPXParser *gpxParser = [[GPXParser alloc] initWithData:data];
+    [gpxParser printAllElements];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
