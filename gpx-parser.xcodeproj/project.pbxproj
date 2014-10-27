@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A8E2B004F1E6CEB8261F98A0 /* GPXLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E2B97E14119E2D92920CF2 /* GPXLog.m */; };
 		A8E2B7E2058C19D9B79B96DF /* GPXSchema.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E2B542CBF184E3B1663AD7 /* GPXSchema.m */; };
 		D4D40DB8199FBED90060F812 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DB7199FBED90060F812 /* main.m */; };
 		D4D40DBB199FBED90060F812 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DBA199FBED90060F812 /* ViewController.m */; };
@@ -31,6 +32,8 @@
 
 /* Begin PBXFileReference section */
 		A8E2B542CBF184E3B1663AD7 /* GPXSchema.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXSchema.m; sourceTree = "<group>"; };
+		A8E2B6843B8988CFC99B4E0A /* GPXLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXLog.h; sourceTree = "<group>"; };
+		A8E2B97E14119E2D92920CF2 /* GPXLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXLog.m; sourceTree = "<group>"; };
 		A8E2BE95141E6CC5B7100A54 /* GPXSchema.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXSchema.h; sourceTree = "<group>"; };
 		D4D40DB2199FBED90060F812 /* gpx-parser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gpx-parser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4D40DB6199FBED90060F812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -139,6 +142,8 @@
 				D4D40DEC199FC1730060F812 /* GPXParser.m */,
 				A8E2B542CBF184E3B1663AD7 /* GPXSchema.m */,
 				A8E2BE95141E6CC5B7100A54 /* GPXSchema.h */,
+				A8E2B97E14119E2D92920CF2 /* GPXLog.m */,
+				A8E2B6843B8988CFC99B4E0A /* GPXLog.h */,
 			);
 			path = "gpx-parser-function";
 			sourceTree = "<group>";
@@ -248,6 +253,7 @@
 				D4D40DB8199FBED90060F812 /* main.m in Sources */,
 				D4D40DBE199FBED90060F812 /* AppDelegate.m in Sources */,
 				A8E2B7E2058C19D9B79B96DF /* GPXSchema.m in Sources */,
+				A8E2B004F1E6CEB8261F98A0 /* GPXLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +387,7 @@
 				CLANG_WARN_OBJC_RECEIVER_WEAK = NO;
 				CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=0";
 				"HEADER_SEARCH_PATHS[arch=*]" = /usr/include/libxml2;
 				INFOPLIST_FILE = "gpx-parser/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GDataXMLNode.h"
 #import "GPXSchema.h"
+#include "GPXLog.h"
 
 /** @author zhangchao
 *  @since 2014-10-27
