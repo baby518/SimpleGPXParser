@@ -35,5 +35,7 @@
 
 - (GPXParser *)initWithData:(NSData *)data;
 - (void)parserAllElements;
+- (void)parserRouteElements:(GDataXMLElement *)rootElement;
+- (void)parserTrackElements:(GDataXMLElement *)rootElement;
 
 @end

@@ -9,6 +9,10 @@ extern NSString * const ROOT_NAME;
 extern NSString * const ATTRIBUTE_ROOT_CREATOR;
 extern NSString * const ATTRIBUTE_ROOT_VERSION;
 
+extern NSString * const ELEMENT_ROUTE;
+extern NSString * const ELEMENT_ROUTE_NUM;
+extern NSString * const ELEMENT_ROUTE_POINT;
+
 extern NSString * const ELEMENT_NAME;
 extern NSString * const ELEMENT_TRACK;
 extern NSString * const ELEMENT_TRACK_SEGMENT;

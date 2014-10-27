@@ -9,6 +9,10 @@ NSString * const ROOT_NAME                          = @"gpx";
 NSString * const ATTRIBUTE_ROOT_CREATOR             = @"creator";
 NSString * const ATTRIBUTE_ROOT_VERSION             = @"version";
 
+NSString * const ELEMENT_ROUTE                      = @"rte";
+NSString * const ELEMENT_ROUTE_NUM                  = @"number";
+NSString * const ELEMENT_ROUTE_POINT                = @"rtept";
+
 NSString * const ELEMENT_NAME                       = @"name";
 NSString * const ELEMENT_TRACK                      = @"trk";
 NSString * const ELEMENT_TRACK_SEGMENT              = @"trkseg";
