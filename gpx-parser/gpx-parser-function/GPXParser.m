@@ -13,8 +13,7 @@
 @synthesize delegate;
 
 - (GPXParser *)initWithData:(NSData *)data {
-    self = [super self];
-    if (self) {
+    if (self = [super self]) {
         mXMLData = data;
         mXMLDoc = [[GDataXMLDocument alloc] initWithData:data options:0 error:nil];
         mRootElement = [mXMLDoc rootElement];
@@ -24,19 +23,19 @@
 
 - (void)parserAllElements {
     if (mRootElement == nil) {
-        [GPXLog LOGW:@"Root Element is not found !!!"];
+        LOGW(@"Root Element is not found !!!");
         return;
     } else if (![[mRootElement name] isEqualToString:ROOT_NAME]) {
-        [GPXLog LOGW:(@"This xml file's ROOT is %@, it seems not a gpx file !!!", [mRootElement name])];
+        LOGW(@"This xml file's ROOT is %@, it seems not a gpx file !!!", [mRootElement name]);
         return;
     }
 
     NSString *creator = [[mRootElement attributeForName:ATTRIBUTE_ROOT_CREATOR] stringValue];
-    [GPXLog LOGD:(@"This xml file's CREATOR is %@", creator)];
+    LOGD(@"This xml file's CREATOR is %@", creator);
     [delegate rootCreatorDidParser:creator];
 
     NSString *version = [[mRootElement attributeForName:ATTRIBUTE_ROOT_VERSION] stringValue];
-    [GPXLog LOGD:(@"This xml file's VERSION is %@", version)];
+    LOGD(@"This xml file's VERSION is %@", version);
     [delegate rootVersionDidParser:version];
 
     //获取根节点下的节点（ trk ）
@@ -45,19 +44,21 @@
     for (GDataXMLElement *track in tracks) {
         //获取 name 节点的值
         NSString *name = [[[track elementsForName:ELEMENT_NAME] objectAtIndex:0] stringValue];
-        [GPXLog LOGD:(@"track name is:%@", name)];
+        LOGD(@"track name is:%@", name);
 
         //获取 trkseg 节点
         GDataXMLElement *trksegElement = [[track elementsForName:ELEMENT_TRACK_SEGMENT] objectAtIndex:0];
         //获取 trkseg 节点下的 trkpt 节点
         NSArray *trackPoints = [trksegElement elementsForName:ELEMENT_TRACK_POINT];
+        int index = 0;
         for (GDataXMLElement *point in trackPoints) {
+            index++;
             //获取 trkpt 节点下的 lat 和 lon 属性, time 和 ele 节点
             NSString *lat = [[point attributeForName:ATTRIBUTE_TRACK_POINT_LATITUDE] stringValue];
             NSString *lon = [[point attributeForName:ATTRIBUTE_TRACK_POINT_LONGITUDE] stringValue];
             NSString *time = [[[point elementsForName:ELEMENT_TRACK_POINT_TIME] objectAtIndex:0] stringValue];
             NSString *ele = [[[point elementsForName:ELEMENT_TRACK_POINT_ELEVATION] objectAtIndex:0] stringValue];
-            [GPXLog LOGD:(@"track Point is: (%@, %@), Time is: %@, Elevation is: %@.", lat, lon, time, ele)];
+            LOGD(@"%d. track Point is: (%@, %@), Time is: %@, Elevation is: %@.", index, lat, lon, time, ele);
         }
     }
 }
