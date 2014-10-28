@@ -53,6 +53,9 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
 - (void)parserTrackElements:(GDataXMLElement *)rootElement {
     NSArray *tracks = [rootElement elementsForName:ELEMENT_TRACK];
     int tracksIndex = 0;
+    unsigned long tracksCount = [tracks count];
+    double curPercentage = 0;
+    double tracksStep = (tracksCount == 0) ? 0.0 : (100.0 / tracksCount);
 
     for (GDataXMLElement *track in tracks) {
         tracksIndex++;
@@ -63,11 +66,15 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
         //获取 trkseg 节点
         NSArray *trackSegments = [track elementsForName:ELEMENT_TRACK_SEGMENT];
         int trksegIndex = 0;
+        unsigned long segCount = [trackSegments count];
+        double trksegStep = (segCount == 0) ? 0.0 : (tracksStep / segCount);
         for (GDataXMLElement *trkseg in trackSegments) {
             trksegIndex++;
             //获取 trkseg 节点下的 trkpt 节点
             NSArray *trackPoints = [trkseg elementsForName:ELEMENT_TRACK_POINT];
             int trkptIndex = 0;
+            unsigned long trkptCount = [trackPoints count];
+            double trkptStep = (trkptCount == 0) ? 0.0 : (trksegStep / trkptCount);
             for (GDataXMLElement *point in trackPoints) {
                 trkptIndex++;
                 //获取 trkpt 节点下的 lat 和 lon 属性, time 和 ele 节点
@@ -77,9 +84,29 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
                 NSString *ele = [[[point elementsForName:ELEMENT_TRACK_POINT_ELEVATION] objectAtIndex:0] stringValue];
                 LOGD(@"%d.%d.%d track Point is: (%@, %@), Time is: %@, Elevation is: %@.",
                         tracksIndex, trksegIndex, trkptIndex, lat, lon, time, ele);
+                curPercentage = curPercentage + trkptStep;
+                [self printPercentageOfParser:curPercentage];
+            }
+            if (trkptCount == 0) {
+                curPercentage = curPercentage + trksegStep;
+                [self printPercentageOfParser:curPercentage];
             }
         }
+        if (trksegStep == 0) {
+            curPercentage = curPercentage + tracksStep;
+            [self printPercentageOfParser:curPercentage];
+        }
     }
+    [self printPercentageOfParser:100];
+}
+
+- (void)printPercentageOfParser:(double)percentage {
+    if (percentage < 0) percentage = 0;
+    if (percentage > 100) percentage = 100;
+    int result = percentage;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [delegate onPercentageOfParser:result];
+    });
 }
 
 - (void)parserAllElements {

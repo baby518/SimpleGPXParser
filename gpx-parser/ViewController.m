@@ -31,6 +31,7 @@
     if (path != nil) {
         // show path in Text Field.
         [mPathTextField setStringValue:path];
+        [mParseStateInfoLabel setStringValue:@""];
     }
     NSData *data = [self loadDataFromFile:path];
 
@@ -96,5 +97,10 @@
 - (void)onErrorWhenParser:(int)errorCode {
     NSLog(@"onErrorWhenParser from GPXParserDelegate, errorCode : %d", errorCode);
     [mParseStateInfoLabel setStringValue:[NSString stringWithFormat:@"Error :%d", errorCode]];
+}
+
+- (void)onPercentageOfParser:(int)percentage {
+//    NSLog(@"onPercentOfParser from GPXParserDelegate, percentage : %d", percentage);
+    [mParseStateInfoLabel setStringValue:[NSString stringWithFormat:@"%d％%", percentage]];
 }
 @end

@@ -24,9 +24,10 @@ extern int const PARSER_ERROR_UNPARSERALBE;
 @protocol GPXParserDelegate <NSObject>
 @optional
 /** PARSER_ERROR_UNSUPPORTED or PARSER_ERROR_UNPARSERALBE */
-- (void)onErrorWhenParser:(int )errorCode;
+- (void)onErrorWhenParser:(int)errorCode;
 - (void)rootCreatorDidParser:(NSString *)creator;
 - (void)rootVersionDidParser:(NSString *)version;
+- (void)onPercentageOfParser:(int)percentage;
 @end
 
 /** @author zhangchao
@@ -45,5 +46,6 @@ extern int const PARSER_ERROR_UNPARSERALBE;
 - (void)parserAllElements;
 - (void)parserRouteElements:(GDataXMLElement *)rootElement;
 - (void)parserTrackElements:(GDataXMLElement *)rootElement;
+- (void)printPercentageOfParser:(double)percentage;
 
 @end
