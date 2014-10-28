@@ -97,15 +97,14 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
             [self printPercentageOfParser:curPercentage];
         }
     }
-    [self printPercentageOfParser:100];
+    [self printPercentageOfParser:100.0];
 }
 
 - (void)printPercentageOfParser:(double)percentage {
-    if (percentage < 0) percentage = 0;
-    if (percentage > 100) percentage = 100;
-    int result = percentage;
+    if (percentage < 0.0) percentage = 0.0;
+    if (percentage > 100.0) percentage = 100.0;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [delegate onPercentageOfParser:result];
+        [delegate onPercentageOfParser:percentage];
     });
 }
 

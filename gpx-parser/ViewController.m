@@ -99,8 +99,8 @@
     [mParseStateInfoLabel setStringValue:[NSString stringWithFormat:@"Error :%d", errorCode]];
 }
 
-- (void)onPercentageOfParser:(int)percentage {
+- (void)onPercentageOfParser:(double)percentage {
 //    NSLog(@"onPercentOfParser from GPXParserDelegate, percentage : %d", percentage);
-    [mParseStateInfoLabel setStringValue:[NSString stringWithFormat:@"%d％%", percentage]];
+    [mParseStateInfoLabel setStringValue:[NSString stringWithFormat:@"%.2f%%", percentage]];
 }
 @end

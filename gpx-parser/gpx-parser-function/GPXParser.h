@@ -27,7 +27,7 @@ extern int const PARSER_ERROR_UNPARSERALBE;
 - (void)onErrorWhenParser:(int)errorCode;
 - (void)rootCreatorDidParser:(NSString *)creator;
 - (void)rootVersionDidParser:(NSString *)version;
-- (void)onPercentageOfParser:(int)percentage;
+- (void)onPercentageOfParser:(double)percentage;
 @end
 
 /** @author zhangchao
