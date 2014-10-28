@@ -13,6 +13,7 @@
 @synthesize mPathTextField;
 @synthesize mCreatorTextField;
 @synthesize mVersionTextField;
+@synthesize mParseStateInfoLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -90,5 +91,10 @@
 - (void)rootVersionDidParser:(NSString *)version {
     NSLog(@"rootVersionDidParser from GPXParserDelegate. %@", version);
     [mVersionTextField setStringValue:version];
+}
+
+- (void)onErrorWhenParser:(int)errorCode {
+    NSLog(@"onErrorWhenParser from GPXParserDelegate, errorCode : %d", errorCode);
+    [mParseStateInfoLabel setStringValue:[NSString stringWithFormat:@"Error :%d", errorCode]];
 }
 @end

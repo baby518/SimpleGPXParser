@@ -8,6 +8,12 @@
 
 #import "GPXParser.h"
 
+int const PARSER_ERROR_UNKNOW                       = -1;
+/** if file is not a xml or is not complete.*/
+int const PARSER_ERROR_UNSUPPORTED                  = 0;
+/** if file is not a gpx.*/
+int const PARSER_ERROR_UNPARSERALBE                 = 1;
+
 @implementation GPXParser
 
 @synthesize delegate;
@@ -78,10 +84,12 @@
 
 - (void)parserAllElements {
     if (mRootElement == nil) {
-        LOGW(@"Root Element is not found !!!");
+        LOGE(@"Root Element is not found !!!");
+        [delegate onErrorWhenParser:PARSER_ERROR_UNSUPPORTED];
         return;
     } else if (![[mRootElement name] isEqualToString:ROOT_NAME]) {
-        LOGW(@"This xml file's ROOT is %@, it seems not a gpx file !!!", [mRootElement name]);
+        LOGE(@"This xml file's ROOT is %@, it seems not a gpx file !!!", [mRootElement name]);
+        [delegate onErrorWhenParser:PARSER_ERROR_UNPARSERALBE];
         return;
     }
 

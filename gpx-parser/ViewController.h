@@ -14,6 +14,7 @@
 @property (weak) IBOutlet NSTextField *mPathTextField;
 @property (weak) IBOutlet NSTextField *mCreatorTextField;
 @property (weak) IBOutlet NSTextField *mVersionTextField;
+@property (weak) IBOutlet NSTextField *mParseStateInfoLabel;
 
 - (IBAction)openFileButtonPressed:(NSButton *)sender;
 

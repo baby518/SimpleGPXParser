@@ -11,12 +11,20 @@
 #import "GPXSchema.h"
 #include "GPXLog.h"
 
+extern int const PARSER_ERROR_UNKNOW;
+/** if file is not a xml or is not complete.*/
+extern int const PARSER_ERROR_UNSUPPORTED;
+/** if file is not a gpx.*/
+extern int const PARSER_ERROR_UNPARSERALBE;
+
 /** @author zhangchao
 *  @since 2014-10-27
 *  @data 2014-10-27
 *  @brief Delegate for View.*/
 @protocol GPXParserDelegate <NSObject>
 @optional
+/** PARSER_ERROR_UNSUPPORTED or PARSER_ERROR_UNPARSERALBE */
+- (void)onErrorWhenParser:(int )errorCode;
 - (void)rootCreatorDidParser:(NSString *)creator;
 - (void)rootVersionDidParser:(NSString *)version;
 @end
