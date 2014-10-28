@@ -10,7 +10,7 @@
 #define DEBUG_FORMAT   (@"DEBUG    <%@:(%d)> %@")
 #define WARNING_FORMAT (@"WARNING  <%p %@:(%d)> %@")
 #define ERROR_FORMAT   (@"ERROR    <%p %@:(%d)> %@")
-#ifdef DEBUG
+#if DEBUG
 #define LOGD(f, ...) NSLog(DEBUG_FORMAT, FILE, LINE, [NSString stringWithFormat:(f), ##__VA_ARGS__])
 #else
 #define LOGD(format, ...)
@@ -19,7 +19,7 @@
 #define LOGE(f, ...) NSLog(ERROR_FORMAT, self, FILE, LINE, [NSString stringWithFormat:(f), ##__VA_ARGS__])
 
 
-#ifdef DEBUG
+#if DEBUG
 #  define LOG(fmt, ...) do {                                            \
         NSString* file = [[NSString alloc] initWithFormat:@"%s", __FILE__]; \
         NSLog((@"%@(%d) " fmt), [file lastPathComponent], __LINE__, ##__VA_ARGS__); \
