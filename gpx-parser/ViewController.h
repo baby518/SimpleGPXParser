@@ -9,14 +9,19 @@
 #import <Cocoa/Cocoa.h>
 #import "GPXParser.h"
 
-@interface ViewController : NSViewController <GPXParserDelegate>
+@interface ViewController : NSViewController <GPXParserDelegate> {
+    NSData *mData;
+}
 
 @property (weak) IBOutlet NSTextField *mPathTextField;
 @property (weak) IBOutlet NSTextField *mCreatorTextField;
 @property (weak) IBOutlet NSTextField *mVersionTextField;
 @property (weak) IBOutlet NSTextField *mParseStateInfoLabel;
+@property (weak) IBOutlet NSProgressIndicator *mParserProgress;
+@property (weak) IBOutlet NSButton *mStartParseButton;
 
 - (IBAction)openFileButtonPressed:(NSButton *)sender;
+- (IBAction)startParserButtonPressed:(NSButton *)sender;
 
 - (NSString *)getFilePathFromDialog;
 - (NSData *)loadDataFromFile:(NSString *)path;

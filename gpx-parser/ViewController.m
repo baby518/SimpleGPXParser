@@ -14,9 +14,13 @@
 @synthesize mCreatorTextField;
 @synthesize mVersionTextField;
 @synthesize mParseStateInfoLabel;
+@synthesize mStartParseButton;
+@synthesize mParserProgress;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [mStartParseButton setEnabled:false];
+    [mParserProgress setDoubleValue:0];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -33,10 +37,13 @@
         [mPathTextField setStringValue:path];
         [mParseStateInfoLabel setStringValue:@""];
     }
-    NSData *data = [self loadDataFromFile:path];
+    mData = [self loadDataFromFile:path];
+    if (mData != nil) [mStartParseButton setEnabled:true];
+}
 
-    if (data != nil) {
-        GPXParser *gpxParser = [[GPXParser alloc] initWithData:data];
+- (IBAction)startParserButtonPressed:(NSButton *)sender {
+    if (mData != nil) {
+        GPXParser *gpxParser = [[GPXParser alloc] initWithData:mData];
         gpxParser.delegate = self;
         [gpxParser parserAllElements];
     }
@@ -65,14 +72,6 @@
     [openPanel setAllowedFileTypes:[NSArray arrayWithObjects:@"gpx"/*, @"xml"*/, nil]];
 
     NSString *result = nil;
-// mutiple selection
-//    // Display the dialog. If the OK button was pressed, process the files.
-//    if ([openPanel runModal] == NSModalResponseOK) { //NSOKButton
-//        NSArray *urls = [openPanel URLs];
-//        for (int i = 0; i < [urls count]; i++) {
-//            NSString *url = [urls objectAtIndex:i];
-//        }
-//    }
 
 // single selection
     if ([openPanel runModal] == NSModalResponseOK) {
@@ -102,5 +101,7 @@
 - (void)onPercentageOfParser:(double)percentage {
 //    NSLog(@"onPercentOfParser from GPXParserDelegate, percentage : %d", percentage);
     [mParseStateInfoLabel setStringValue:[NSString stringWithFormat:@"%.2f%%", percentage]];
+    [mParserProgress setDoubleValue:percentage];
 }
+
 @end

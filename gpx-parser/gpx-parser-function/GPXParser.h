@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GDataXMLNode.h"
 #import "GPXSchema.h"
-#include "GPXLog.h"
+#import "GPXLog.h"
 
 extern int const PARSER_ERROR_UNKNOW;
 /** if file is not a xml or is not complete.*/
