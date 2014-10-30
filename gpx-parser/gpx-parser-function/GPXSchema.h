@@ -4,6 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GPXLog.h"
 
 extern NSString * const ROOT_NAME;
 extern NSString * const ATTRIBUTE_ROOT_CREATOR;
@@ -27,5 +28,8 @@ extern NSString * const ELEMENT_TRACK_POINT_ELEVATION;
 *  @since 2014-10-26
 *  @data 2014-10-26
 *  @brief some rules of gpx file. it also used for GPX Parser and GPX Builder.*/
-@interface GPXSchema : NSObject
+@interface GPXSchema : NSObject {
+//    NSDateFormatter * mGPSTimeFormatter;
+}
++ (NSData *) convertString2Time:(NSString *)string;
 @end

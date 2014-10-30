@@ -78,33 +78,40 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
             for (GDataXMLElement *point in trackPoints) {
                 trkptIndex++;
                 //获取 trkpt 节点下的 lat 和 lon 属性, time 和 ele 节点
-                NSString *lat = [[point attributeForName:ATTRIBUTE_TRACK_POINT_LATITUDE] stringValue];
-                NSString *lon = [[point attributeForName:ATTRIBUTE_TRACK_POINT_LONGITUDE] stringValue];
-                NSString *time = [[[point elementsForName:ELEMENT_TRACK_POINT_TIME] objectAtIndex:0] stringValue];
-                NSString *ele = [[[point elementsForName:ELEMENT_TRACK_POINT_ELEVATION] objectAtIndex:0] stringValue];
-                LOGD(@"%d.%d.%d track Point is: (%@, %@), Time is: %@, Elevation is: %@.",
-                        tracksIndex, trksegIndex, trkptIndex, lat, lon, time, ele);
+                double latValue = [[[point attributeForName:ATTRIBUTE_TRACK_POINT_LATITUDE] stringValue] doubleValue];
+                double lonValue = [[[point attributeForName:ATTRIBUTE_TRACK_POINT_LONGITUDE] stringValue] doubleValue];
+                NSData *timeValue = [GPXSchema convertString2Time:[[[point elementsForName:ELEMENT_TRACK_POINT_TIME] objectAtIndex:0] stringValue]];
+                double eleValue = [[[[point elementsForName:ELEMENT_TRACK_POINT_ELEVATION] objectAtIndex:0] stringValue] doubleValue];
+                LOGD(@"track Point double : (%f, %f, %f), %@", latValue, lonValue, eleValue, timeValue);
+                TrackPoint *trackPoint = [[TrackPoint alloc] initWithTrack:latValue :lonValue :eleValue :timeValue];
+                [self postTrackPointOfParser:[trackPoint getLocation]];
                 curPercentage = curPercentage + trkptStep;
-                [self printPercentageOfParser:curPercentage];
+                [self postPercentageOfParser:curPercentage];
             }
             if (trkptCount == 0) {
                 curPercentage = curPercentage + trksegStep;
-                [self printPercentageOfParser:curPercentage];
+                [self postPercentageOfParser:curPercentage];
             }
         }
         if (trksegStep == 0) {
             curPercentage = curPercentage + tracksStep;
-            [self printPercentageOfParser:curPercentage];
+            [self postPercentageOfParser:curPercentage];
         }
     }
-    [self printPercentageOfParser:100.0];
+    [self postPercentageOfParser:100.0];
 }
 
-- (void)printPercentageOfParser:(double)percentage {
+- (void)postPercentageOfParser:(double)percentage {
     if (percentage < 0.0) percentage = 0.0;
     if (percentage > 100.0) percentage = 100.0;
     dispatch_async(dispatch_get_main_queue(), ^{
         [delegate onPercentageOfParser:percentage];
+    });
+}
+
+- (void)postTrackPointOfParser:(TrackPoint *)point {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [delegate trackPointDidParser:point];
     });
 }
 

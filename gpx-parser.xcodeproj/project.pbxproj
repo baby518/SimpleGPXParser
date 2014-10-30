@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A8E2B64F6250066A45349B5D /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E2BC072A58495E14E83251 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A8E2B7B1E139FFF07DAB4962 /* TrackPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E2BE132ABF4EC6BF70FAB4 /* TrackPoint.m */; };
 		A8E2B7E2058C19D9B79B96DF /* GPXSchema.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E2B542CBF184E3B1663AD7 /* GPXSchema.m */; };
+		A8E2BE65D54CD8F2BD16496D /* GPXParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E2B25734A9D0D1FA0AB4BC /* GPXParser.m */; };
 		D4D40DB8199FBED90060F812 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DB7199FBED90060F812 /* main.m */; };
 		D4D40DBB199FBED90060F812 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DBA199FBED90060F812 /* ViewController.m */; };
 		D4D40DBE199FBED90060F812 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DBD199FBED90060F812 /* AppDelegate.m */; };
 		D4D40DC0199FBED90060F812 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D40DBF199FBED90060F812 /* Images.xcassets */; };
 		D4D40DC3199FBED90060F812 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4D40DC1199FBED90060F812 /* Main.storyboard */; };
 		D4D40DCF199FBED90060F812 /* gpx_parserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DCE199FBED90060F812 /* gpx_parserTests.m */; };
-		D4D40DED199FC1730060F812 /* GPXParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DEC199FC1730060F812 /* GPXParser.m */; };
-		D4D40DF0199FC6330060F812 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DEF199FC6330060F812 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D4D40DF2199FC7800060F812 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D40DF1199FC7800060F812 /* libxml2.dylib */; };
 /* End PBXBuildFile section */
 
@@ -31,11 +31,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A8E2B25734A9D0D1FA0AB4BC /* GPXParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXParser.m; sourceTree = "<group>"; };
 		A8E2B542CBF184E3B1663AD7 /* GPXSchema.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXSchema.m; sourceTree = "<group>"; };
 		A8E2B6843B8988CFC99B4E0A /* GPXLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXLog.h; sourceTree = "<group>"; };
+		A8E2BB7059F6E328EEBEC8AD /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		A8E2BC072A58495E14E83251 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		A8E2BD449F54BBFD8CB35270 /* TrackPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackPoint.h; sourceTree = "<group>"; };
 		A8E2BE132ABF4EC6BF70FAB4 /* TrackPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackPoint.m; sourceTree = "<group>"; };
 		A8E2BE95141E6CC5B7100A54 /* GPXSchema.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXSchema.h; sourceTree = "<group>"; };
+		A8E2BF4DBD297711093289C9 /* GPXParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXParser.h; sourceTree = "<group>"; };
 		D4D40DB2199FBED90060F812 /* gpx-parser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gpx-parser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4D40DB6199FBED90060F812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4D40DB7199FBED90060F812 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -48,10 +52,6 @@
 		D4D40DC8199FBED90060F812 /* gpx-parserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gpx-parserTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4D40DCD199FBED90060F812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4D40DCE199FBED90060F812 /* gpx_parserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gpx_parserTests.m; sourceTree = "<group>"; };
-		D4D40DEB199FC1730060F812 /* GPXParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXParser.h; sourceTree = "<group>"; };
-		D4D40DEC199FC1730060F812 /* GPXParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXParser.m; sourceTree = "<group>"; };
-		D4D40DEE199FC6330060F812 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
-		D4D40DEF199FC6330060F812 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		D4D40DF1199FC7800060F812 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -74,6 +74,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A8E2BC4D6447C35406A68054 /* GDataXML */ = {
+			isa = PBXGroup;
+			children = (
+				A8E2B25734A9D0D1FA0AB4BC /* GPXParser.m */,
+				A8E2BF4DBD297711093289C9 /* GPXParser.h */,
+				A8E2BC072A58495E14E83251 /* GDataXMLNode.m */,
+				A8E2BB7059F6E328EEBEC8AD /* GDataXMLNode.h */,
+			);
+			name = GDataXML;
+			sourceTree = "<group>";
+		};
 		D4D40DA9199FBED90060F812 = {
 			isa = PBXGroup;
 			children = (
@@ -137,15 +148,12 @@
 		D4D40DEA199FC1730060F812 /* gpx-parser-function */ = {
 			isa = PBXGroup;
 			children = (
-				D4D40DEE199FC6330060F812 /* GDataXMLNode.h */,
-				D4D40DEF199FC6330060F812 /* GDataXMLNode.m */,
-				D4D40DEB199FC1730060F812 /* GPXParser.h */,
-				D4D40DEC199FC1730060F812 /* GPXParser.m */,
 				A8E2B542CBF184E3B1663AD7 /* GPXSchema.m */,
 				A8E2BE95141E6CC5B7100A54 /* GPXSchema.h */,
 				A8E2B6843B8988CFC99B4E0A /* GPXLog.h */,
 				A8E2BE132ABF4EC6BF70FAB4 /* TrackPoint.m */,
 				A8E2BD449F54BBFD8CB35270 /* TrackPoint.h */,
+				A8E2BC4D6447C35406A68054 /* GDataXML */,
 			);
 			path = "gpx-parser-function";
 			sourceTree = "<group>";
@@ -249,13 +257,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4D40DED199FC1730060F812 /* GPXParser.m in Sources */,
 				D4D40DBB199FBED90060F812 /* ViewController.m in Sources */,
-				D4D40DF0199FC6330060F812 /* GDataXMLNode.m in Sources */,
 				D4D40DB8199FBED90060F812 /* main.m in Sources */,
 				D4D40DBE199FBED90060F812 /* AppDelegate.m in Sources */,
 				A8E2B7E2058C19D9B79B96DF /* GPXSchema.m in Sources */,
 				A8E2B7B1E139FFF07DAB4962 /* TrackPoint.m in Sources */,
+				A8E2BE65D54CD8F2BD16496D /* GPXParser.m in Sources */,
+				A8E2B64F6250066A45349B5D /* GDataXMLNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

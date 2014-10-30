@@ -104,4 +104,8 @@
     [mParserProgress setDoubleValue:percentage];
 }
 
+- (void)trackPointDidParser:(TrackPoint *)trackPoint {
+
+}
+
 @end

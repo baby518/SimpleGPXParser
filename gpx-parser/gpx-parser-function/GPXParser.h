@@ -10,6 +10,7 @@
 #import "GDataXMLNode.h"
 #import "GPXSchema.h"
 #import "GPXLog.h"
+#import "TrackPoint.h"
 
 extern int const PARSER_ERROR_UNKNOW;
 /** if file is not a xml or is not complete.*/
@@ -28,6 +29,7 @@ extern int const PARSER_ERROR_UNPARSERALBE;
 - (void)rootCreatorDidParser:(NSString *)creator;
 - (void)rootVersionDidParser:(NSString *)version;
 - (void)onPercentageOfParser:(double)percentage;
+- (void)trackPointDidParser:(TrackPoint *)trackPoint;
 @end
 
 /** @author zhangchao
@@ -46,6 +48,7 @@ extern int const PARSER_ERROR_UNPARSERALBE;
 - (void)parserAllElements;
 - (void)parserRouteElements:(GDataXMLElement *)rootElement;
 - (void)parserTrackElements:(GDataXMLElement *)rootElement;
-- (void)printPercentageOfParser:(double)percentage;
+- (void)postPercentageOfParser:(double)percentage;
+- (void)postTrackPointOfParser:(TrackPoint *)point;
 
 @end
