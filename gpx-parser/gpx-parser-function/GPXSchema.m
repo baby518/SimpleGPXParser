@@ -24,12 +24,13 @@ NSString * const ELEMENT_TRACK_POINT_TIME           = @"time";
 NSString * const ELEMENT_TRACK_POINT_ELEVATION      = @"ele";
 
 @implementation GPXSchema
-+ (NSData *) convertString2Time:(NSString *)string{
-    NSDateFormatter * GPSTimeFormatter = [[NSDateFormatter alloc] init];
++ (NSDate *)convertString2Time:(NSString *)string {
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
     //2013-11-02T15:34:49Z
     //@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
-    [GPSTimeFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
-    NSData *result = [GPSTimeFormatter dateFromString:string];
+//    [timeFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
+    [timeFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'"];
+    NSDate *result = [timeFormatter dateFromString:string];
     LOGD(@"convertString2Time %@", result);
     return result;
 }

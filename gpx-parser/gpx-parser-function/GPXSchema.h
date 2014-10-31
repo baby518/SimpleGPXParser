@@ -31,5 +31,5 @@ extern NSString * const ELEMENT_TRACK_POINT_ELEVATION;
 @interface GPXSchema : NSObject {
 //    NSDateFormatter * mGPSTimeFormatter;
 }
-+ (NSData *) convertString2Time:(NSString *)string;
++ (NSDate *) convertString2Time:(NSString *)string;
 @end

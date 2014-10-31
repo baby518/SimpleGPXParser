@@ -80,11 +80,11 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
                 //获取 trkpt 节点下的 lat 和 lon 属性, time 和 ele 节点
                 double latValue = [[[point attributeForName:ATTRIBUTE_TRACK_POINT_LATITUDE] stringValue] doubleValue];
                 double lonValue = [[[point attributeForName:ATTRIBUTE_TRACK_POINT_LONGITUDE] stringValue] doubleValue];
-                NSData *timeValue = [GPXSchema convertString2Time:[[[point elementsForName:ELEMENT_TRACK_POINT_TIME] objectAtIndex:0] stringValue]];
+                NSDate *timeValue = [GPXSchema convertString2Time:[[[point elementsForName:ELEMENT_TRACK_POINT_TIME] objectAtIndex:0] stringValue]];
                 double eleValue = [[[[point elementsForName:ELEMENT_TRACK_POINT_ELEVATION] objectAtIndex:0] stringValue] doubleValue];
                 LOGD(@"track Point double : (%f, %f, %f), %@", latValue, lonValue, eleValue, timeValue);
                 TrackPoint *trackPoint = [[TrackPoint alloc] initWithTrack:latValue :lonValue :eleValue :timeValue];
-                [self postTrackPointOfParser:[trackPoint getLocation]];
+                [self postTrackPointOfParser:trackPoint];
                 curPercentage = curPercentage + trkptStep;
                 [self postPercentageOfParser:curPercentage];
             }
