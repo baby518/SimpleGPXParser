@@ -9,4 +9,9 @@
 @implementation Track {
 
 }
+
+- (void)addTrackSegment:(TrackSegment *)trkseg {
+
+}
+
 @end
