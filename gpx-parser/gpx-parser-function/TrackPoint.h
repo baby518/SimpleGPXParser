@@ -8,10 +8,9 @@
 
 
 @interface TrackPoint : NSObject {
-    CLLocation *location;
 }
 // returns a CLLocation object representing this point
-//@property (nonatomic, strong, readonly) CLLocation *location;
+@property (nonatomic, strong, readonly) CLLocation *location;
 
 // the latitude of the trackpoint
 @property (nonatomic, assign) double latitude;

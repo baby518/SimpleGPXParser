@@ -10,17 +10,11 @@
 #import "GPXParser.h"
 
 @implementation ViewController
-@synthesize mPathTextField;
-@synthesize mCreatorTextField;
-@synthesize mVersionTextField;
-@synthesize mParseStateInfoLabel;
-@synthesize mStartParseButton;
-@synthesize mParserProgress;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [mStartParseButton setEnabled:false];
-    [mParserProgress setDoubleValue:0];
+    [_mStartParseButton setEnabled:false];
+    [_mParserProgress setDoubleValue:0];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -34,11 +28,11 @@
     NSString *path = [self getFilePathFromDialog];
     if (path != nil) {
         // show path in Text Field.
-        [mPathTextField setStringValue:path];
-        [mParseStateInfoLabel setStringValue:@""];
+        [_mPathTextField setStringValue:path];
+        [_mParseStateInfoLabel setStringValue:@""];
     }
     mData = [self loadDataFromFile:path];
-    if (mData != nil) [mStartParseButton setEnabled:true];
+    if (mData != nil) [_mStartParseButton setEnabled:true];
 }
 
 - (IBAction)startParserButtonPressed:(NSButton *)sender {
@@ -85,26 +79,31 @@
 
 - (void)rootCreatorDidParser:(NSString *)creator {
     NSLog(@"rootCreatorDidParser from GPXParserDelegate. %@", creator);
-    [mCreatorTextField setStringValue:creator];
+    [_mCreatorTextField setStringValue:creator];
 }
 
 - (void)rootVersionDidParser:(NSString *)version {
     NSLog(@"rootVersionDidParser from GPXParserDelegate. %@", version);
-    [mVersionTextField setStringValue:version];
+    [_mVersionTextField setStringValue:version];
 }
 
 - (void)onErrorWhenParser:(int)errorCode {
     NSLog(@"onErrorWhenParser from GPXParserDelegate, errorCode : %d", errorCode);
-    [mParseStateInfoLabel setStringValue:[NSString stringWithFormat:@"Error :%d", errorCode]];
+    [_mParseStateInfoLabel setStringValue:[NSString stringWithFormat:@"Error :%d", errorCode]];
 }
 
 - (void)onPercentageOfParser:(double)percentage {
 //    NSLog(@"onPercentOfParser from GPXParserDelegate, percentage : %d", percentage);
-    [mParseStateInfoLabel setStringValue:[NSString stringWithFormat:@"%.2f%%", percentage]];
-    [mParserProgress setDoubleValue:percentage];
+    [_mParseStateInfoLabel setStringValue:[NSString stringWithFormat:@"%.2f%%", percentage]];
+    [_mParserProgress setDoubleValue:percentage];
+    [_mParserProgress setIndeterminate:YES];
 }
 
-- (void)elementDidParser:(TrackPoint *)trackPoint {
+- (void)trackPointDidParser:(TrackPoint *)trackPoint {
+
+}
+
+- (void)trackSegmentDidParser:(TrackSegment *)segment {
 
 }
 

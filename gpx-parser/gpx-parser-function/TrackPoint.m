@@ -10,8 +10,8 @@
 }
 
 - (CLLocation *)getLocation {
-    if (!location) {
-        location = [[CLLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(self.latitude, self.longitude)
+    if (!_location) {
+        _location = [[CLLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(self.latitude, self.longitude)
                                                   altitude:self.elevation
                                         horizontalAccuracy:0
                                           verticalAccuracy:0
@@ -19,13 +19,13 @@
                                                      speed:0
                                                  timestamp:self.time];
     }
-    return location;
+    return _location;
 }
 
 - (TrackPoint *)initWithTrack:(double)latitude :(double)longitude :(double)elevation :(NSDate *)time {
     self = [super self];
     if (self) {
-        location = [[CLLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(latitude, longitude)
+        _location = [[CLLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(latitude, longitude)
                                                   altitude:elevation
                                         horizontalAccuracy:0
                                           verticalAccuracy:0

@@ -6,7 +6,9 @@
 #import <Foundation/Foundation.h>
 #import "TrackSegment.h"
 
-@interface Track : NSObject
+@interface Track : NSObject {
+    NSMutableArray *mTracks;
+}
 
 // the name of the track
 @property (nonatomic, copy) NSString * trackName;
@@ -20,6 +22,7 @@
 // total gain, in meters
 @property (nonatomic, assign, readonly) double elevationGain;
 
--(void)addTrackSegment:(TrackSegment*)trkseg;
+- (id)initWithName:(NSString *)name;
+- (void)addTrackSegment:(TrackSegment *)trkseg;
 
 @end

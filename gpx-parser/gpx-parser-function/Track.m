@@ -5,13 +5,26 @@
 
 #import "Track.h"
 
-
 @implementation Track {
 
 }
 
-- (void)addTrackSegment:(TrackSegment *)trkseg {
+- (id)init {
+    return [self initWithName:@""];
+}
 
+- (id)initWithName:(NSString *)name {
+    self = [super init];
+    if (self) {
+        mTracks = [NSMutableArray array];
+    }
+    _trackName = name;
+    return self;
+}
+
+- (void)addTrackSegment:(TrackSegment *)trkseg {
+    [mTracks addObject:trkseg];
+    _length += trkseg.length;
 }
 
 @end

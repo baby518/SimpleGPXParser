@@ -6,7 +6,9 @@
 #import <Foundation/Foundation.h>
 #import "TrackPoint.h"
 
-@interface TrackSegment : NSObject
+@interface TrackSegment : NSObject {
+    NSMutableArray *mTrackPoints;
+}
 
 // The total length, in meters, of this segment
 @property(nonatomic, assign, readonly) double length;
@@ -15,8 +17,8 @@
 @property(nonatomic, assign, readonly) double elevationGain;
 
 // array of GPXTrackpoint objects
-@property(nonatomic, copy) NSArray *trackpoints;
+@property(nonatomic, copy) NSArray *trackPoints;
 
-- (void)addTrackpoint:(TrackPoint *)trackpoint;
+- (void)addTrackpoint:(TrackPoint *)trackPoint;
 
 @end

@@ -15,14 +15,9 @@ int const PARSER_ERROR_UNSUPPORTED                  = 0;
 int const PARSER_ERROR_UNPARSERALBE                 = 1;
 
 @implementation GPXParser {
-    NSData *mXMLData;
-    GDataXMLDocument *mXMLDoc;
-    GDataXMLElement *mRootElement;
 }
 
-@synthesize delegate;
-
-- (GPXParser *)initWithData:(NSData *)data {
+- (id)initWithData:(NSData *)data {
     self = [super self];
     if (self) {
         mXMLData = data;
@@ -67,6 +62,8 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
         NSString *name = [[[track elementsForName:ELEMENT_NAME] objectAtIndex:0] stringValue];
         LOGD(@"track name is:%@", name);
 
+        Track *trackForPost = [[Track alloc] initWithName:name];
+
         //获取 trkseg 节点
         NSArray *trackSegments = [track elementsForName:ELEMENT_TRACK_SEGMENT];
         int trksegIndex = 0;
@@ -79,6 +76,8 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
             int trkptIndex = 0;
             unsigned long trkptCount = [trackPoints count];
             double trkptStep = (trkptCount == 0) ? 0.0 : (trksegStep / trkptCount);
+            //当前TrackSegment
+            TrackSegment *trackSegmentForPost = [TrackSegment alloc];
             for (GDataXMLElement *point in trackPoints) {
                 trkptIndex++;
                 //获取 trkpt 节点下的 lat 和 lon 属性, time 和 ele 节点
@@ -87,16 +86,29 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
                 NSDate *timeValue = [GPXSchema convertString2Time:[[[point elementsForName:ELEMENT_TRACK_POINT_TIME] objectAtIndex:0] stringValue]];
                 double eleValue = [[[[point elementsForName:ELEMENT_TRACK_POINT_ELEVATION] objectAtIndex:0] stringValue] doubleValue];
                 LOGD(@"track Point double : (%f, %f, %f), %@", latValue, lonValue, eleValue, timeValue);
-                TrackPoint *trackPoint = [[TrackPoint alloc] initWithTrack:latValue :lonValue :eleValue :timeValue];
-                [self postTrackPointOfParser:trackPoint];
+                //当前TrackPoint
+                TrackPoint *trackPointForPost = [[TrackPoint alloc] initWithTrack:latValue :lonValue :eleValue :timeValue];
+                //发送当前TrackPoint
+                [self postTrackPointOfParser:trackPointForPost];
+                //将当前TrackPoint加入TrackSegment
+                [trackSegmentForPost addTrackpoint:trackPointForPost];
                 curPercentage = curPercentage + trkptStep;
+                //发送当前进度
                 [self postPercentageOfParser:curPercentage];
             }
+            //发送当前TrackSegment
+            [self postTrackSegmentOfParser:trackSegmentForPost];
+            //将当前TrackSegment加入Track
+            [trackForPost addTrackSegment:trackSegmentForPost];
+            //发送当前进度
             if (trkptCount == 0) {
                 curPercentage = curPercentage + trksegStep;
                 [self postPercentageOfParser:curPercentage];
             }
         }
+        //发送当前Track
+        // to do
+        //发送当前进度
         if (trksegStep == 0) {
             curPercentage = curPercentage + tracksStep;
             [self postPercentageOfParser:curPercentage];
@@ -108,24 +120,30 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
     if (percentage < 0.0) percentage = 0.0;
     if (percentage > 100.0) percentage = 100.0;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [delegate onPercentageOfParser:percentage];
+        [_delegate onPercentageOfParser:percentage];
     });
 }
 
 - (void)postTrackPointOfParser:(TrackPoint *)point {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [delegate elementDidParser:point];
+        [_delegate trackPointDidParser:point];
+    });
+}
+
+- (void)postTrackSegmentOfParser:(TrackSegment *)segment {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_delegate trackSegmentDidParser:segment];
     });
 }
 
 - (void)parserAllElements {
     if (mRootElement == nil) {
         LOGE(@"Root Element is not found !!!");
-        [delegate onErrorWhenParser:PARSER_ERROR_UNSUPPORTED];
+        [_delegate onErrorWhenParser:PARSER_ERROR_UNSUPPORTED];
         return;
     } else if (![[mRootElement name] isEqualToString:ROOT_NAME]) {
         LOGE(@"This xml file's ROOT is %@, it seems not a gpx file !!!", [mRootElement name]);
-        [delegate onErrorWhenParser:PARSER_ERROR_UNPARSERALBE];
+        [_delegate onErrorWhenParser:PARSER_ERROR_UNPARSERALBE];
         return;
     }
 
@@ -134,13 +152,13 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
         NSString *creator = [[mRootElement attributeForName:ATTRIBUTE_ROOT_CREATOR] stringValue];
         LOGD(@"This xml file's CREATOR is %@", creator);
         dispatch_async(dispatch_get_main_queue(), ^{
-            [delegate rootCreatorDidParser:creator];
+            [_delegate rootCreatorDidParser:creator];
         });
 
         NSString *version = [[mRootElement attributeForName:ATTRIBUTE_ROOT_VERSION] stringValue];
         LOGD(@"This xml file's VERSION is %@", version);
         dispatch_async(dispatch_get_main_queue(), ^{
-            [delegate rootVersionDidParser:version];
+            [_delegate rootVersionDidParser:version];
         });
 
         //获取根节点下的节点（ rte ）

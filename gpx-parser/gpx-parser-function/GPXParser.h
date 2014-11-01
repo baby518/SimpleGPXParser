@@ -11,6 +11,8 @@
 #import "GPXSchema.h"
 #import "GPXLog.h"
 #import "TrackPoint.h"
+#import "TrackSegment.h"
+#import "Track.h"
 
 extern int const PARSER_ERROR_UNKNOW;
 /** if file is not a xml or is not complete.*/
@@ -29,7 +31,8 @@ extern int const PARSER_ERROR_UNPARSERALBE;
 - (void)rootCreatorDidParser:(NSString *)creator;
 - (void)rootVersionDidParser:(NSString *)version;
 - (void)onPercentageOfParser:(double)percentage;
-- (void)elementDidParser:(TrackPoint *)trackPoint;
+- (void)trackPointDidParser:(TrackPoint *)trackPoint;
+- (void)trackSegmentDidParser:(TrackSegment *)segment;
 @end
 
 /** @author zhangchao
@@ -37,15 +40,19 @@ extern int const PARSER_ERROR_UNPARSERALBE;
  *  @data 2014-10-26
  *  @brief used for parse the gpx file.*/
 @interface GPXParser : NSObject {
+    NSData *mXMLData;
+    GDataXMLDocument *mXMLDoc;
+    GDataXMLElement *mRootElement;
 }
 
 @property (nonatomic, assign) id <GPXParserDelegate> delegate;
 
-- (GPXParser *)initWithData:(NSData *)data;
+- (id)initWithData:(NSData *)data;
 - (void)parserAllElements;
 - (void)parserRouteElements:(GDataXMLElement *)rootElement;
 - (void)parserTrackElements:(GDataXMLElement *)rootElement;
 - (void)postPercentageOfParser:(double)percentage;
 - (void)postTrackPointOfParser:(TrackPoint *)point;
+- (void)postTrackSegmentOfParser:(TrackSegment *)segment;
 
 @end
