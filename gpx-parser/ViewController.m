@@ -15,6 +15,12 @@
     [super viewDidLoad];
     [_mStartParseButton setEnabled:false];
     [_mParserProgress setDoubleValue:0];
+    [_mParserProgress setIndeterminate:NO];
+    [_mParserProgress setUsesThreadedAnimation:NO];
+
+    [_mParserCircleProgress setDoubleValue:0];
+    [_mParserCircleProgress setIndeterminate:NO];
+    [_mParserCircleProgress setUsesThreadedAnimation:NO];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -96,7 +102,7 @@
 //    NSLog(@"onPercentOfParser from GPXParserDelegate, percentage : %d", percentage);
     [_mParseStateInfoLabel setStringValue:[NSString stringWithFormat:@"%.2f%%", percentage]];
     [_mParserProgress setDoubleValue:percentage];
-    [_mParserProgress setIndeterminate:YES];
+    [_mParserCircleProgress setDoubleValue:percentage];
 }
 
 - (void)trackPointDidParser:(TrackPoint *)trackPoint {

@@ -19,6 +19,7 @@
 @property (weak) IBOutlet NSTextField *mParseStateInfoLabel;
 @property (weak) IBOutlet NSProgressIndicator *mParserProgress;
 @property (weak) IBOutlet NSButton *mStartParseButton;
+@property (weak) IBOutlet NSProgressIndicator *mParserCircleProgress;
 
 - (IBAction)openFileButtonPressed:(NSButton *)sender;
 - (IBAction)startParserButtonPressed:(NSButton *)sender;
