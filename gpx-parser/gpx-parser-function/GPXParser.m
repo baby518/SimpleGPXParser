@@ -14,7 +14,11 @@ int const PARSER_ERROR_UNSUPPORTED                  = 0;
 /** if file is not a gpx.*/
 int const PARSER_ERROR_UNPARSERALBE                 = 1;
 
-@implementation GPXParser
+@implementation GPXParser {
+    NSData *mXMLData;
+    GDataXMLDocument *mXMLDoc;
+    GDataXMLElement *mRootElement;
+}
 
 @synthesize delegate;
 
@@ -100,7 +104,6 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
     }
     [self postPercentageOfParser:100.0];
 }
-
 - (void)postPercentageOfParser:(double)percentage {
     if (percentage < 0.0) percentage = 0.0;
     if (percentage > 100.0) percentage = 100.0;
@@ -111,7 +114,7 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
 
 - (void)postTrackPointOfParser:(TrackPoint *)point {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [delegate trackPointDidParser:point];
+        [delegate elementDidParser:point];
     });
 }
 

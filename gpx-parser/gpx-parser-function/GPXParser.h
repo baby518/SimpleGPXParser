@@ -29,7 +29,7 @@ extern int const PARSER_ERROR_UNPARSERALBE;
 - (void)rootCreatorDidParser:(NSString *)creator;
 - (void)rootVersionDidParser:(NSString *)version;
 - (void)onPercentageOfParser:(double)percentage;
-- (void)trackPointDidParser:(TrackPoint *)trackPoint;
+- (void)elementDidParser:(TrackPoint *)trackPoint;
 @end
 
 /** @author zhangchao
@@ -37,11 +37,8 @@ extern int const PARSER_ERROR_UNPARSERALBE;
  *  @data 2014-10-26
  *  @brief used for parse the gpx file.*/
 @interface GPXParser : NSObject {
-@protected
-    NSData *mXMLData;
-    GDataXMLDocument *mXMLDoc;
-    GDataXMLElement *mRootElement;
 }
+
 @property (nonatomic, assign) id <GPXParserDelegate> delegate;
 
 - (GPXParser *)initWithData:(NSData *)data;
