@@ -20,6 +20,8 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
 - (id)initWithData:(NSData *)data {
     self = [super self];
     if (self) {
+        unsigned long size = [data length];
+        LOGD(@"initWithData size : %lu Byte, %lu KB", size, size / 1024);
         mXMLData = data;
         mXMLDoc = [[GDataXMLDocument alloc] initWithData:data options:0 error:nil];
         mRootElement = [mXMLDoc rootElement];
