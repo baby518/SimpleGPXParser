@@ -17,6 +17,9 @@
 @property (weak) IBOutlet NSTextField *mCreatorTextField;
 @property (weak) IBOutlet NSTextField *mVersionTextField;
 @property (weak) IBOutlet NSTextField *mParseStateInfoLabel;
+@property (weak) IBOutlet NSTextField *mLengthTextField;
+@property (weak) IBOutlet NSTextField *mTotalTimeTextField;
+@property (weak) IBOutlet NSTextField *mElevationGainTextField;
 @property (weak) IBOutlet NSProgressIndicator *mParserProgress;
 @property (weak) IBOutlet NSButton *mStartParseButton;
 @property (weak) IBOutlet NSProgressIndicator *mParserCircleProgress;

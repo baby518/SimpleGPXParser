@@ -25,6 +25,8 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
         mXMLData = data;
         mXMLDoc = [[GDataXMLDocument alloc] initWithData:data options:0 error:nil];
         mRootElement = [mXMLDoc rootElement];
+
+        mAllTracks = [NSMutableArray array];
     }
     return self;
 }
@@ -79,7 +81,7 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
             unsigned long trkptCount = [trackPoints count];
             double trkptStep = (trkptCount == 0) ? 0.0 : (trksegStep / trkptCount);
             //当前TrackSegment
-            TrackSegment *trackSegmentForPost = [TrackSegment alloc];
+            TrackSegment *trackSegmentForPost = [[TrackSegment alloc] init];
             for (GDataXMLElement *point in trackPoints) {
                 trkptIndex++;
                 //获取 trkpt 节点下的 lat 和 lon 属性, time 和 ele 节点
@@ -109,13 +111,16 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
             }
         }
         //发送当前Track
-        // to do
+        [self postTrackOfParser:trackForPost];
+        [mAllTracks addObject:trackForPost];
+        [self postAllTracksOfParser:mAllTracks];
         //发送当前进度
         if (trksegStep == 0) {
             curPercentage = curPercentage + tracksStep;
             [self postPercentageOfParser:curPercentage];
         }
     }
+    [self postAllTracksOfParser:mAllTracks];
     [self postPercentageOfParser:100.0];
 }
 - (void)postPercentageOfParser:(double)percentage {
@@ -135,6 +140,18 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
 - (void)postTrackSegmentOfParser:(TrackSegment *)segment {
     dispatch_async(dispatch_get_main_queue(), ^{
         [_delegate trackSegmentDidParser:segment];
+    });
+}
+
+- (void)postTrackOfParser:(Track *)track {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_delegate trackDidParser:track];
+    });
+}
+
+- (void)postAllTracksOfParser:(NSArray *)tracks {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_delegate allTracksDidParser:tracks];
     });
 }
 

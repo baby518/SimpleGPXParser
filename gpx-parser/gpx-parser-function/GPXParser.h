@@ -33,6 +33,8 @@ extern int const PARSER_ERROR_UNPARSERALBE;
 - (void)onPercentageOfParser:(double)percentage;
 - (void)trackPointDidParser:(TrackPoint *)trackPoint;
 - (void)trackSegmentDidParser:(TrackSegment *)segment;
+- (void)trackDidParser:(Track *)track;
+- (void)allTracksDidParser:(NSArray *)tracks;
 @end
 
 /** @author zhangchao
@@ -43,6 +45,8 @@ extern int const PARSER_ERROR_UNPARSERALBE;
     NSData *mXMLData;
     GDataXMLDocument *mXMLDoc;
     GDataXMLElement *mRootElement;
+    // a gpx file maybe has many tracks, so save them in a array;
+    NSMutableArray *mAllTracks;
 }
 
 @property (nonatomic, assign) id <GPXParserDelegate> delegate;
@@ -54,5 +58,7 @@ extern int const PARSER_ERROR_UNPARSERALBE;
 - (void)postPercentageOfParser:(double)percentage;
 - (void)postTrackPointOfParser:(TrackPoint *)point;
 - (void)postTrackSegmentOfParser:(TrackSegment *)segment;
+- (void)postTrackOfParser:(Track *)track;
+- (void)postAllTracksOfParser:(NSArray *)tracks;
 
 @end

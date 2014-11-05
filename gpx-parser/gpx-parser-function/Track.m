@@ -16,15 +16,16 @@
 - (id)initWithName:(NSString *)name {
     self = [super init];
     if (self) {
-        mTracks = [NSMutableArray array];
+        _trackSegments = [NSMutableArray array];
     }
     _trackName = name;
     return self;
 }
 
 - (void)addTrackSegment:(TrackSegment *)trkseg {
-    [mTracks addObject:trkseg];
+    [_trackSegments addObject:trkseg];
     _length += trkseg.length;
+    _totalTime += trkseg.totalTime;
 }
 
 @end

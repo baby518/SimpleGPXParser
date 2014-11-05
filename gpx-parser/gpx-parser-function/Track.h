@@ -7,20 +7,23 @@
 #import "TrackSegment.h"
 
 @interface Track : NSObject {
-    NSMutableArray *mTracks;
+//    NSMutableArray *mTrackSegments;
 }
 
 // the name of the track
 @property (nonatomic, copy) NSString * trackName;
 
 // array of GPXTrackSegment objects
-@property (nonatomic, copy, readonly) NSArray* trackSegments;
+@property (nonatomic, copy, readonly) NSMutableArray* trackSegments;
 
 // total length, in meters, of the track
 @property (nonatomic, assign, readonly) double length;
 
 // total gain, in meters
 @property (nonatomic, assign, readonly) double elevationGain;
+
+// The total time cost , in second(s)
+@property (nonatomic, assign, readonly) double totalTime;
 
 - (id)initWithName:(NSString *)name;
 - (void)addTrackSegment:(TrackSegment *)trkseg;

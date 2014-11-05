@@ -5,9 +5,10 @@
 
 #import <Foundation/Foundation.h>
 #import "TrackPoint.h"
+#import "GPXLog.h"
 
 @interface TrackSegment : NSObject {
-    NSMutableArray *mTrackPoints;
+//    NSMutableArray *mTrackPoints;
 }
 
 // The total length, in meters, of this segment
@@ -16,8 +17,11 @@
 // The total elevation gain, in meters, of this segment
 @property(nonatomic, assign, readonly) double elevationGain;
 
+// The total time cost , in second(s), of this segment
+@property(nonatomic, assign, readonly) double totalTime;
+
 // array of GPXTrackpoint objects
-@property(nonatomic, copy) NSArray *trackPoints;
+@property(nonatomic, copy) NSMutableArray *trackPoints;
 
 - (void)addTrackpoint:(TrackPoint *)trackPoint;
 

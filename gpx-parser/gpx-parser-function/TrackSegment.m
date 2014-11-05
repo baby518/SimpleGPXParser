@@ -7,23 +7,33 @@
 
 
 @implementation TrackSegment {
-
 }
 
 -(id)init {
     self = [super init];
     if (self) {
-        mTrackPoints = [NSMutableArray array];
+        _trackPoints = [NSMutableArray array];
+//        mTrackPoints = [@[] mutableCopy];
+//        mTrackPoints = [NSMutableArray arrayWithCapacity:5];
     }
     return self;
 }
 
 - (void)addTrackpoint:(TrackPoint *)trackPoint {
-    [mTrackPoints addObject:trackPoint];
-    if ([mTrackPoints count] > 1) {
-        TrackPoint *last = mTrackPoints[[mTrackPoints count] - 2];
+    [_trackPoints addObject:trackPoint];
+    if ([_trackPoints count] > 1) {
+        TrackPoint *last = _trackPoints[[_trackPoints count] - 2];
         // figure out distance from last point
         _length += [[last getLocation] distanceFromLocation:[trackPoint getLocation]];
+
+        _totalTime += [[[trackPoint getLocation] timestamp] timeIntervalSince1970]
+                - [[[last getLocation] timestamp] timeIntervalSince1970];
+
+        // figure out if we climbed at all since last point
+        double climb = trackPoint.elevation - last.elevation;
+        if (climb > 0) {
+            _elevationGain += climb;
+        }
     }
 }
 

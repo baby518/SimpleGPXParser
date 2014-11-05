@@ -113,4 +113,22 @@
 
 }
 
+- (void)trackDidParser:(Track *)track {
+//    if (track == nil) return;
+//    [_mLengthTextField setStringValue:[NSString stringWithFormat:@"%.2f", [track length]]];
+}
+
+- (void)allTracksDidParser:(NSArray *)tracks {
+    double length = 0;
+    double elevationGain = 0;
+    double totalTime = 0;
+    for (Track *track in tracks) {
+        length += track.length;
+        elevationGain += track.elevationGain;
+        totalTime += track.totalTime;
+    }
+    [_mLengthTextField setStringValue:[NSString stringWithFormat:@"%.2f", length]];
+    [_mElevationGainTextField setStringValue:[NSString stringWithFormat:@"%.2f", elevationGain]];
+    [_mTotalTimeTextField setStringValue:[NSString stringWithFormat:@"%.2f", totalTime]];
+}
 @end
