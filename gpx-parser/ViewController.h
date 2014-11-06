@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "GPXParser.h"
 
-@interface ViewController : NSViewController <GPXParserDelegate> {
+@interface ViewController : NSViewController <GPXParserDelegate, NSTableViewDataSource, NSTableViewDelegate> {
     NSData *mData;
 }
 

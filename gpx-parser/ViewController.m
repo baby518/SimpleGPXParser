@@ -131,4 +131,27 @@
     [_mElevationGainTextField setStringValue:[NSString stringWithFormat:@"%.2f", elevationGain]];
     [_mTotalTimeTextField setStringValue:[NSString stringWithFormat:@"%.2f", totalTime]];
 }
+
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+    // Get a new ViewCell
+    NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+
+    // Since this is a single-column table view, this would not be necessary.
+    // But it's a good practice to do it in order by remember it when a table is multicolumn.
+//    if ([tableColumn.identifier isEqualToString:@"BugColumn"]) {
+//        return cellView;
+//    }
+    [[cellView textField] setStringValue:@"qwe"];
+    return cellView;
+}
+
+//- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+//{
+//    return nil;
+//}
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
+    return 2;
+}
+
 @end
