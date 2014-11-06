@@ -20,6 +20,12 @@ extern int const PARSER_ERROR_UNSUPPORTED;
 /** if file is not a gpx.*/
 extern int const PARSER_ERROR_UNPARSERALBE;
 
+extern int const PARSER_CALLBACK_MODE_DEFAULT;
+/** post all track points, track segments, tracks.*/
+extern int const PARSER_CALLBACK_MODE_ALL;
+/** just post tracks array when all tracks parser done.*/
+extern int const PARSER_CALLBACK_MODE_JUST_RESULT;
+
 /** @author zhangchao
 *  @since 2014-10-27
 *  @data 2014-10-27
@@ -50,6 +56,7 @@ extern int const PARSER_ERROR_UNPARSERALBE;
 }
 
 @property (nonatomic, assign) id <GPXParserDelegate> delegate;
+@property (nonatomic, assign) int callbackMode;
 
 - (id)initWithData:(NSData *)data;
 - (void)parserAllElements;

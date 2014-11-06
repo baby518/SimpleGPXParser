@@ -45,6 +45,7 @@
     if (mData != nil) {
         GPXParser *gpxParser = [[GPXParser alloc] initWithData:mData];
         gpxParser.delegate = self;
+        gpxParser.callbackMode = PARSER_CALLBACK_MODE_ALL;
         [gpxParser parserAllElements];
     }
 }

@@ -14,6 +14,13 @@ int const PARSER_ERROR_UNSUPPORTED                  = 0;
 /** if file is not a gpx.*/
 int const PARSER_ERROR_UNPARSERALBE                 = 1;
 
+/** post all track points, track segments, tracks.*/
+int const PARSER_CALLBACK_MODE_ALL                  = 0;
+/** just post tracks array when all tracks parser done.*/
+int const PARSER_CALLBACK_MODE_JUST_RESULT          = 1;
+
+int const PARSER_CALLBACK_MODE_DEFAULT              = PARSER_CALLBACK_MODE_JUST_RESULT;
+
 @implementation GPXParser {
 }
 
@@ -27,6 +34,8 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
         mRootElement = [mXMLDoc rootElement];
 
         mAllTracks = [NSMutableArray array];
+
+        _callbackMode = PARSER_CALLBACK_MODE_DEFAULT;
     }
     return self;
 }
@@ -93,7 +102,8 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
                 //当前TrackPoint
                 TrackPoint *trackPointForPost = [[TrackPoint alloc] initWithTrack:latValue :lonValue :eleValue :timeValue];
                 //发送当前TrackPoint
-                [self postTrackPointOfParser:trackPointForPost];
+                if (_callbackMode == PARSER_CALLBACK_MODE_ALL)
+                    [self postTrackPointOfParser:trackPointForPost];
                 //将当前TrackPoint加入TrackSegment
                 [trackSegmentForPost addTrackpoint:trackPointForPost];
                 curPercentage = curPercentage + trkptStep;
@@ -101,7 +111,8 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
                 [self postPercentageOfParser:curPercentage];
             }
             //发送当前TrackSegment
-            [self postTrackSegmentOfParser:trackSegmentForPost];
+            if (_callbackMode == PARSER_CALLBACK_MODE_ALL)
+                [self postTrackSegmentOfParser:trackSegmentForPost];
             //将当前TrackSegment加入Track
             [trackForPost addTrackSegment:trackSegmentForPost];
             //发送当前进度
@@ -111,16 +122,19 @@ int const PARSER_ERROR_UNPARSERALBE                 = 1;
             }
         }
         //发送当前Track
-        [self postTrackOfParser:trackForPost];
+        if (_callbackMode == PARSER_CALLBACK_MODE_ALL)
+            [self postTrackOfParser:trackForPost];
         [mAllTracks addObject:trackForPost];
-        [self postAllTracksOfParser:mAllTracks];
+        if (_callbackMode == PARSER_CALLBACK_MODE_ALL)
+            [self postAllTracksOfParser:mAllTracks];
         //发送当前进度
         if (trksegStep == 0) {
             curPercentage = curPercentage + tracksStep;
             [self postPercentageOfParser:curPercentage];
         }
     }
-    [self postAllTracksOfParser:mAllTracks];
+    if (_callbackMode == PARSER_CALLBACK_MODE_ALL || _callbackMode == PARSER_CALLBACK_MODE_JUST_RESULT)
+        [self postAllTracksOfParser:mAllTracks];
     [self postPercentageOfParser:100.0];
 }
 - (void)postPercentageOfParser:(double)percentage {
