@@ -24,6 +24,8 @@
 @property (weak) IBOutlet NSButton *mStartParseButton;
 @property (weak) IBOutlet NSProgressIndicator *mParserCircleProgress;
 
+@property (weak) IBOutlet NSTableView *mGPXTableView;
+
 - (IBAction)openFileButtonPressed:(NSButton *)sender;
 - (IBAction)startParserButtonPressed:(NSButton *)sender;
 
