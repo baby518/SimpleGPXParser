@@ -49,7 +49,6 @@
 }
 
 - (IBAction)startParserButtonPressed:(NSButton *)sender {
-//    [_currentTrackPoints removeAllObjects];
     [self removeAllObjectsOfTable];
 
     if (mData != nil) {
@@ -124,16 +123,18 @@
 }
 
 - (void)trackSegmentDidParser:(TrackSegment *)segment {
-    if (_parserCallBackMode == PARSER_CALLBACK_MODE_ALL) {
-        [_mGPXTableView reloadData];
-    }
+//    // if we want show some item while parsing data.
+//    if (_parserCallBackMode == PARSER_CALLBACK_MODE_ALL) {
+//        [_mGPXTableView reloadData];
+//    }
 }
 
 - (void)trackDidParser:(Track *)track {
 //    if (track == nil) return;
-//    [_mLengthTextField setStringValue:[NSString stringWithFormat:@"%.2f", [track length]]];
-//    _numberOfRows += track.countOfPoints;
-//    [_mGPXTableView reloadData];
+    // if we want show some item while parsing data.
+    if (_parserCallBackMode == PARSER_CALLBACK_MODE_ALL) {
+        [_mGPXTableView reloadData];
+    }
 }
 
 - (void)allTracksDidParser:(NSArray *)tracks {
@@ -166,6 +167,7 @@
 }
 
 - (void)removeAllObjectsOfTable {
+    [_currentTrackPoints removeAllObjects];
     _numberOfRows = 0;
     [_mGPXTableView reloadData];
 }
