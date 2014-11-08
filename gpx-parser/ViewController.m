@@ -21,6 +21,9 @@
     [_mParserCircleProgress setDoubleValue:0];
     [_mParserCircleProgress setIndeterminate:NO];
     [_mParserCircleProgress setUsesThreadedAnimation:NO];
+
+    _numberOfRows = 0;
+    _currentTrackPoints = [NSMutableArray array];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -42,6 +45,9 @@
 }
 
 - (IBAction)startParserButtonPressed:(NSButton *)sender {
+//    [_currentTrackPoints removeAllObjects];
+    [self removeAllObjectsOfTable];
+
     if (mData != nil) {
         GPXParser *gpxParser = [[GPXParser alloc] initWithData:mData];
         gpxParser.delegate = self;
@@ -107,7 +113,16 @@
 }
 
 - (void)trackPointDidParser:(TrackPoint *)trackPoint {
+    NSLog(@" zczc trackPointDidParser");
+    [_currentTrackPoints addObject:trackPoint];
+//    [_mGPXTableView reloadData];
+//    [_mGPXTableView beginUpdates];
 
+//    // 添加一个空行
+//    [_mGPXTableView insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:0] withAnimation:NSTableViewAnimationEffectGap];
+//    [_mGPXTableView editColumn:0 row:0 withEvent:nil select:YES];
+
+//    [_mGPXTableView endUpdates];
 }
 
 - (void)trackSegmentDidParser:(TrackSegment *)segment {
@@ -117,9 +132,13 @@
 - (void)trackDidParser:(Track *)track {
 //    if (track == nil) return;
 //    [_mLengthTextField setStringValue:[NSString stringWithFormat:@"%.2f", [track length]]];
+    _numberOfRows += track.countOfPoints;
+    [_mGPXTableView reloadData];
 }
 
 - (void)allTracksDidParser:(NSArray *)tracks {
+    NSLog(@" zczc allTracksDidParser");
+    _allTracks = [NSArray arrayWithArray:tracks];
     double length = 0;
     double elevationGain = 0;
     double totalTime = 0;
@@ -127,9 +146,89 @@
         length += track.length;
         elevationGain += track.elevationGain;
         totalTime += track.totalTime;
+//        _numberOfRows += track.countOfPoints;
     }
     [_mLengthTextField setStringValue:[NSString stringWithFormat:@"%.2f", length]];
     [_mElevationGainTextField setStringValue:[NSString stringWithFormat:@"%.2f", elevationGain]];
     [_mTotalTimeTextField setStringValue:[NSString stringWithFormat:@"%.2f", totalTime]];
+
+//    [_mGPXTableView reloadData];
 }
+
+- (void)removeAllObjectsOfTable {
+    _numberOfRows = 0;
+    [_mGPXTableView reloadData];
+}
+
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+    // Get a new ViewCell
+    NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+
+    if ([tableColumn.identifier isEqualToString:@"trackID"]) {
+        [[cellView textField] setStringValue:[NSString stringWithFormat:@"%ld", row + 1]];
+        return cellView;
+    } else if ([tableColumn.identifier isEqualToString:@"trackTime"]) {
+        [[cellView textField] setStringValue:@"time"];
+        return cellView;
+    } else if ([tableColumn.identifier isEqualToString:@"trackLon"]) {
+        [[cellView textField] setStringValue:@"lon"];
+        return cellView;
+    } else if ([tableColumn.identifier isEqualToString:@"trackLat"]) {
+        [[cellView textField] setStringValue:@"lat"];
+        return cellView;
+    } else if ([tableColumn.identifier isEqualToString:@"trackEle"]) {
+        [[cellView textField] setStringValue:@"ele"];
+        return cellView;
+    }
+
+    return cellView;
+}
+
+
+//- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+//    // Get a new ViewCell
+//    NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+//
+//    long rowTemp = row;
+//    long trackIndex = 0;
+//    for (Track *track in _allTracks) {
+//        if (rowTemp < [track countOfPoints]) {
+//            break;
+//        } else {
+//            rowTemp = rowTemp - [track countOfPoints];
+//        }
+//        trackIndex++;
+//    }
+//
+//    if ([tableColumn.identifier isEqualToString:@"trackID"]) {
+//        [[cellView textField] setStringValue:[NSString stringWithFormat:@"%ld", row + 1]];
+//        return cellView;
+//    } else if ([tableColumn.identifier isEqualToString:@"trackTime"]) {
+//        [[cellView textField] setStringValue:@"time"];
+//        return cellView;
+//    } else if ([tableColumn.identifier isEqualToString:@"trackLon"]) {
+//        [[cellView textField] setStringValue:@"lon"];
+//        return cellView;
+//    } else if ([tableColumn.identifier isEqualToString:@"trackLat"]) {
+//        [[cellView textField] setStringValue:@"lat"];
+//        return cellView;
+//    } else if ([tableColumn.identifier isEqualToString:@"trackEle"]) {
+//        [[cellView textField] setStringValue:@"ele"];
+//        return cellView;
+//    }
+//    return cellView;
+//}
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
+    NSLog(@" zczc numberOfRowsInTableView %ld", _numberOfRows);
+    return _numberOfRows;
+}
+
+//- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+//{
+//    NSLog(@" zczc objectValueForTableColumn row %ld", row);
+//
+//    return [NSString stringWithFormat:@"row %ld", row];
+//}
+
 @end

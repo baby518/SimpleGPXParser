@@ -330,7 +330,7 @@
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                 <tableColumns>
-                                                                    <tableColumn editable="NO" width="30" minWidth="30" maxWidth="40" id="cTG-73-LsM">
+                                                                    <tableColumn identifier="trackID" editable="NO" width="40" minWidth="40" maxWidth="50" id="cTG-73-LsM">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="序号">
                                                                             <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -344,7 +344,7 @@
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         <prototypeCellViews>
                                                                             <tableCellView id="XwN-u2-t1W">
-                                                                                <rect key="frame" x="1" y="1" width="30" height="17"/>
+                                                                                <rect key="frame" x="2" y="2" width="40" height="17"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ur8-8n-2UW">
@@ -362,7 +362,7 @@
                                                                             </tableCellView>
                                                                         </prototypeCellViews>
                                                                     </tableColumn>
-                                                                    <tableColumn width="100" minWidth="100" maxWidth="200" id="Fiv-Bh-ZTP">
+                                                                    <tableColumn identifier="trackTime" width="100" minWidth="100" maxWidth="200" id="Fiv-Bh-ZTP">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="时间">
                                                                             <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -394,7 +394,7 @@
                                                                             </tableCellView>
                                                                         </prototypeCellViews>
                                                                     </tableColumn>
-                                                                    <tableColumn width="100" minWidth="100" maxWidth="200" id="QE4-q4-dgQ">
+                                                                    <tableColumn identifier="trackLon" width="100" minWidth="100" maxWidth="200" id="QE4-q4-dgQ">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="经度">
                                                                             <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -426,7 +426,7 @@
                                                                             </tableCellView>
                                                                         </prototypeCellViews>
                                                                     </tableColumn>
-                                                                    <tableColumn width="100" minWidth="100" maxWidth="200" id="1yJ-Ki-Tuf">
+                                                                    <tableColumn identifier="trackLat" width="100" minWidth="100" maxWidth="200" id="1yJ-Ki-Tuf">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="纬度">
                                                                             <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -458,7 +458,7 @@
                                                                             </tableCellView>
                                                                         </prototypeCellViews>
                                                                     </tableColumn>
-                                                                    <tableColumn width="104" minWidth="100" maxWidth="200" id="rNM-vT-K8s">
+                                                                    <tableColumn identifier="trackEle" width="104" minWidth="100" maxWidth="200" id="rNM-vT-K8s">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="海拔">
                                                                             <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -491,6 +491,10 @@
                                                                         </prototypeCellViews>
                                                                     </tableColumn>
                                                                 </tableColumns>
+                                                                <connections>
+                                                                    <outlet property="dataSource" destination="XfG-lQ-9wD" id="gL1-yp-M7E"/>
+                                                                    <outlet property="delegate" destination="XfG-lQ-9wD" id="gUc-2y-CJ0"/>
+                                                                </connections>
                                                             </tableView>
                                                         </subviews>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -499,7 +503,7 @@
                                                         <rect key="frame" x="1" y="114.73041439056396" width="231" height="16"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
-                                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="PdU-Js-uqu">
+                                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="PdU-Js-uqu">
                                                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>

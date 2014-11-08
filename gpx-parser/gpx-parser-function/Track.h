@@ -16,6 +16,9 @@
 // array of GPXTrackSegment objects
 @property (nonatomic, copy, readonly) NSMutableArray* trackSegments;
 
+// children's countOfPoints
+@property (nonatomic, assign, readonly) long countOfPoints;
+
 // total length, in meters, of the track
 @property (nonatomic, assign, readonly) double length;
 

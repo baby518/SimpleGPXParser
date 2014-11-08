@@ -11,6 +11,9 @@
 //    NSMutableArray *mTrackPoints;
 }
 
+// children's countOfPoints
+@property(nonatomic, assign, readonly) long countOfPoints;
+
 // The total length, in meters, of this segment
 @property(nonatomic, assign, readonly) double length;
 

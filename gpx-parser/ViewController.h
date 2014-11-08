@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "GPXParser.h"
 
-@interface ViewController : NSViewController <GPXParserDelegate> {
+@interface ViewController : NSViewController <GPXParserDelegate, NSTableViewDataSource, NSTableViewDelegate> {
     NSData *mData;
 }
 
@@ -25,11 +25,16 @@
 @property (weak) IBOutlet NSProgressIndicator *mParserCircleProgress;
 
 @property (weak) IBOutlet NSTableView *mGPXTableView;
+@property (nonatomic, assign) long numberOfRows;
+@property (nonatomic, assign) NSArray * allTracks;
+@property (nonatomic, copy) NSMutableArray *currentTrackPoints;
 
 - (IBAction)openFileButtonPressed:(NSButton *)sender;
 - (IBAction)startParserButtonPressed:(NSButton *)sender;
 
 - (NSString *)getFilePathFromDialog;
 - (NSData *)loadDataFromFile:(NSString *)path;
+
+- (void)removeAllObjectsOfTable;
 @end
 
