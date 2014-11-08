@@ -15,6 +15,7 @@
         _trackPoints = [NSMutableArray array];
 //        mTrackPoints = [@[] mutableCopy];
 //        mTrackPoints = [NSMutableArray arrayWithCapacity:5];
+        _countOfPoints = 0;
     }
     return self;
 }
@@ -35,6 +36,7 @@
             _elevationGain += climb;
         }
     }
+    _countOfPoints = [_trackPoints count];
 }
 
 @end

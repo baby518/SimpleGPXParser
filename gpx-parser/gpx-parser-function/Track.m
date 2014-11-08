@@ -17,8 +17,9 @@
     self = [super init];
     if (self) {
         _trackSegments = [NSMutableArray array];
+        _trackName = name;
+        _countOfPoints = 0;
     }
-    _trackName = name;
     return self;
 }
 
@@ -26,6 +27,7 @@
     [_trackSegments addObject:trkseg];
     _length += trkseg.length;
     _totalTime += trkseg.totalTime;
+    _countOfPoints += trkseg.countOfPoints;
 }
 
 @end

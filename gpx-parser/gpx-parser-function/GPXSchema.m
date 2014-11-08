@@ -34,4 +34,14 @@ NSString * const ELEMENT_TRACK_POINT_ELEVATION      = @"ele";
     LOGD(@"convertString2Time %@", result);
     return result;
 }
+
++ (NSString *) convertTime2String:(NSDate *)time {
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+    //2013-11-02T15:34:49Z
+    //@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
+//    [timeFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
+    [timeFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'"];
+    NSString *dateString = [timeFormatter stringFromDate:time];
+    return dateString;
+}
 @end

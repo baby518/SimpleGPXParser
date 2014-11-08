@@ -32,4 +32,5 @@ extern NSString * const ELEMENT_TRACK_POINT_ELEVATION;
 //    NSDateFormatter * mGPSTimeFormatter;
 }
 + (NSDate *) convertString2Time:(NSString *)string;
++ (NSString *) convertTime2String:(NSDate *)time;
 @end
