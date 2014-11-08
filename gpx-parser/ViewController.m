@@ -39,6 +39,8 @@
         // show path in Text Field.
         [_mPathTextField setStringValue:path];
         [_mParseStateInfoLabel setStringValue:@""];
+        [_mParserProgress setDoubleValue:0];
+        [_mParserCircleProgress setDoubleValue:0];
     }
     mData = [self loadDataFromFile:path];
     if (mData != nil) [_mStartParseButton setEnabled:true];
@@ -115,25 +117,18 @@
 - (void)trackPointDidParser:(TrackPoint *)trackPoint {
     NSLog(@" zczc trackPointDidParser");
     [_currentTrackPoints addObject:trackPoint];
-//    [_mGPXTableView reloadData];
-//    [_mGPXTableView beginUpdates];
-
-//    // 添加一个空行
-//    [_mGPXTableView insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:0] withAnimation:NSTableViewAnimationEffectGap];
-//    [_mGPXTableView editColumn:0 row:0 withEvent:nil select:YES];
-
-//    [_mGPXTableView endUpdates];
+    _numberOfRows += 1;
 }
 
 - (void)trackSegmentDidParser:(TrackSegment *)segment {
-
+    [_mGPXTableView reloadData];
 }
 
 - (void)trackDidParser:(Track *)track {
 //    if (track == nil) return;
 //    [_mLengthTextField setStringValue:[NSString stringWithFormat:@"%.2f", [track length]]];
-    _numberOfRows += track.countOfPoints;
-    [_mGPXTableView reloadData];
+//    _numberOfRows += track.countOfPoints;
+//    [_mGPXTableView reloadData];
 }
 
 - (void)allTracksDidParser:(NSArray *)tracks {
@@ -168,56 +163,25 @@
         [[cellView textField] setStringValue:[NSString stringWithFormat:@"%ld", row + 1]];
         return cellView;
     } else if ([tableColumn.identifier isEqualToString:@"trackTime"]) {
-        [[cellView textField] setStringValue:@"time"];
+        NSDate *time = [[[_currentTrackPoints objectAtIndex:row] getLocation] timestamp];
+        [[cellView textField] setStringValue:[GPXSchema convertTime2String:time]];
         return cellView;
     } else if ([tableColumn.identifier isEqualToString:@"trackLon"]) {
-        [[cellView textField] setStringValue:@"lon"];
+        double lon = [[_currentTrackPoints objectAtIndex:row] longitude];
+        [[cellView textField] setStringValue:[NSString stringWithFormat:@"%f", lon]];
         return cellView;
     } else if ([tableColumn.identifier isEqualToString:@"trackLat"]) {
-        [[cellView textField] setStringValue:@"lat"];
+        double lat = [[_currentTrackPoints objectAtIndex:row] latitude];
+        [[cellView textField] setStringValue:[NSString stringWithFormat:@"%f", lat]];
         return cellView;
     } else if ([tableColumn.identifier isEqualToString:@"trackEle"]) {
-        [[cellView textField] setStringValue:@"ele"];
+        double ele = [[[_currentTrackPoints objectAtIndex:row] getLocation] altitude];
+        [[cellView textField] setStringValue:[NSString stringWithFormat:@"%f", ele]];
         return cellView;
     }
 
     return cellView;
 }
-
-
-//- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-//    // Get a new ViewCell
-//    NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-//
-//    long rowTemp = row;
-//    long trackIndex = 0;
-//    for (Track *track in _allTracks) {
-//        if (rowTemp < [track countOfPoints]) {
-//            break;
-//        } else {
-//            rowTemp = rowTemp - [track countOfPoints];
-//        }
-//        trackIndex++;
-//    }
-//
-//    if ([tableColumn.identifier isEqualToString:@"trackID"]) {
-//        [[cellView textField] setStringValue:[NSString stringWithFormat:@"%ld", row + 1]];
-//        return cellView;
-//    } else if ([tableColumn.identifier isEqualToString:@"trackTime"]) {
-//        [[cellView textField] setStringValue:@"time"];
-//        return cellView;
-//    } else if ([tableColumn.identifier isEqualToString:@"trackLon"]) {
-//        [[cellView textField] setStringValue:@"lon"];
-//        return cellView;
-//    } else if ([tableColumn.identifier isEqualToString:@"trackLat"]) {
-//        [[cellView textField] setStringValue:@"lat"];
-//        return cellView;
-//    } else if ([tableColumn.identifier isEqualToString:@"trackEle"]) {
-//        [[cellView textField] setStringValue:@"ele"];
-//        return cellView;
-//    }
-//    return cellView;
-//}
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     NSLog(@" zczc numberOfRowsInTableView %ld", _numberOfRows);

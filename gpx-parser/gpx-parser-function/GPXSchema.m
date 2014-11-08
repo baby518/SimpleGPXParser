@@ -28,9 +28,12 @@ NSString * const ELEMENT_TRACK_POINT_ELEVATION      = @"ele";
     NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
     //2013-11-02T15:34:49Z
     //@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
-//    [timeFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
     [timeFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'"];
     NSDate *result = [timeFormatter dateFromString:string];
+    if (result == nil) {
+        [timeFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss''Z'"];
+        result = [timeFormatter dateFromString:string];
+    }
     LOGD(@"convertString2Time %@", result);
     return result;
 }
@@ -39,9 +42,12 @@ NSString * const ELEMENT_TRACK_POINT_ELEVATION      = @"ele";
     NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
     //2013-11-02T15:34:49Z
     //@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
-//    [timeFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
-    [timeFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'"];
+    [timeFormatter setDateFormat:@"yyyy'-'MM'-'dd'-'HH':'mm':'ss'.'SSS"];
     NSString *dateString = [timeFormatter stringFromDate:time];
+    if ([dateString length] == 0) {
+        [timeFormatter setDateFormat:@"yyyy'-'MM'-'dd'-'HH':'mm':'ss'"];
+        dateString = [timeFormatter stringFromDate:time];
+    }
     return dateString;
 }
 @end

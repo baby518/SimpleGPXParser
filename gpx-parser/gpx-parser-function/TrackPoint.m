@@ -25,6 +25,10 @@
 - (TrackPoint *)initWithTrack:(double)latitude :(double)longitude :(double)elevation :(NSDate *)time {
     self = [super self];
     if (self) {
+        _latitude = latitude;
+        _longitude = longitude;
+        _elevation = elevation;
+        _time = time;
         _location = [[CLLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(latitude, longitude)
                                                   altitude:elevation
                                         horizontalAccuracy:0

@@ -19,6 +19,7 @@
         _trackSegments = [NSMutableArray array];
         _trackName = name;
         _countOfPoints = 0;
+        _elevationGain = 0;
     }
     return self;
 }
@@ -28,6 +29,7 @@
     _length += trkseg.length;
     _totalTime += trkseg.totalTime;
     _countOfPoints += trkseg.countOfPoints;
+    _elevationGain += trkseg.elevationGain;
 }
 
 @end
