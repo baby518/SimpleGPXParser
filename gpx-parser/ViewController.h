@@ -28,6 +28,7 @@
 @property (nonatomic, assign) long numberOfRows;
 @property (nonatomic, assign) NSArray * allTracks;
 @property (nonatomic, copy) NSMutableArray *currentTrackPoints;
+@property (nonatomic, assign) int parserCallBackMode;
 
 - (IBAction)openFileButtonPressed:(NSButton *)sender;
 - (IBAction)startParserButtonPressed:(NSButton *)sender;

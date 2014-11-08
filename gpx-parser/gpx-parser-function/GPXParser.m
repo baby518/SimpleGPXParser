@@ -125,8 +125,8 @@ int const PARSER_CALLBACK_MODE_DEFAULT              = PARSER_CALLBACK_MODE_JUST_
         if (_callbackMode == PARSER_CALLBACK_MODE_ALL)
             [self postTrackOfParser:trackForPost];
         [mAllTracks addObject:trackForPost];
-        if (_callbackMode == PARSER_CALLBACK_MODE_ALL)
-            [self postAllTracksOfParser:mAllTracks];
+//        if (_callbackMode == PARSER_CALLBACK_MODE_ALL)
+//            [self postAllTracksOfParser:mAllTracks];
         //发送当前进度
         if (trksegStep == 0) {
             curPercentage = curPercentage + tracksStep;

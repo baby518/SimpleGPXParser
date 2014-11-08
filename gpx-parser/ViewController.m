@@ -24,6 +24,8 @@
 
     _numberOfRows = 0;
     _currentTrackPoints = [NSMutableArray array];
+
+    _parserCallBackMode = PARSER_CALLBACK_MODE_JUST_RESULT;
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -53,7 +55,7 @@
     if (mData != nil) {
         GPXParser *gpxParser = [[GPXParser alloc] initWithData:mData];
         gpxParser.delegate = self;
-        gpxParser.callbackMode = PARSER_CALLBACK_MODE_ALL;
+        gpxParser.callbackMode = _parserCallBackMode;
         [gpxParser parserAllElements];
     }
 }
@@ -115,13 +117,16 @@
 }
 
 - (void)trackPointDidParser:(TrackPoint *)trackPoint {
-    NSLog(@" zczc trackPointDidParser");
-    [_currentTrackPoints addObject:trackPoint];
-    _numberOfRows += 1;
+    if (_parserCallBackMode == PARSER_CALLBACK_MODE_ALL) {
+        [_currentTrackPoints addObject:trackPoint];
+        _numberOfRows = [_currentTrackPoints count];
+    }
 }
 
 - (void)trackSegmentDidParser:(TrackSegment *)segment {
-    [_mGPXTableView reloadData];
+    if (_parserCallBackMode == PARSER_CALLBACK_MODE_ALL) {
+        [_mGPXTableView reloadData];
+    }
 }
 
 - (void)trackDidParser:(Track *)track {
@@ -132,7 +137,6 @@
 }
 
 - (void)allTracksDidParser:(NSArray *)tracks {
-    NSLog(@" zczc allTracksDidParser");
     _allTracks = [NSArray arrayWithArray:tracks];
     double length = 0;
     double elevationGain = 0;
@@ -141,13 +145,24 @@
         length += track.length;
         elevationGain += track.elevationGain;
         totalTime += track.totalTime;
-//        _numberOfRows += track.countOfPoints;
     }
     [_mLengthTextField setStringValue:[NSString stringWithFormat:@"%.2f", length]];
     [_mElevationGainTextField setStringValue:[NSString stringWithFormat:@"%.2f", elevationGain]];
     [_mTotalTimeTextField setStringValue:[NSString stringWithFormat:@"%.2f", totalTime]];
 
-//    [_mGPXTableView reloadData];
+    // reload here if use PARSER_CALLBACK_MODE_JUST_RESULT
+    if (_parserCallBackMode == PARSER_CALLBACK_MODE_JUST_RESULT) {
+        _numberOfRows = 0;
+        for (Track *track in tracks) {
+            _numberOfRows += track.countOfPoints;
+            for (TrackSegment *segment in [track trackSegments]) {
+                for (TrackPoint *point in [segment trackPoints]) {
+                    [_currentTrackPoints addObject:point];
+                }
+            }
+        }
+        [_mGPXTableView reloadData];
+    }
 }
 
 - (void)removeAllObjectsOfTable {
@@ -184,14 +199,11 @@
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    NSLog(@" zczc numberOfRowsInTableView %ld", _numberOfRows);
     return _numberOfRows;
 }
 
 //- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 //{
-//    NSLog(@" zczc objectValueForTableColumn row %ld", row);
-//
 //    return [NSString stringWithFormat:@"row %ld", row];
 //}
 
