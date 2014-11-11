@@ -7,9 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <MapKit/MapKit.h>
 #import "GPXParser.h"
 
-@interface ViewController : NSViewController <GPXParserDelegate, NSTableViewDataSource, NSTableViewDelegate> {
+@interface ViewController : NSViewController <GPXParserDelegate, NSTableViewDataSource, NSTableViewDelegate, MKMapViewDelegate> {
     NSData *mData;
 }
 
@@ -24,6 +25,7 @@
 @property (weak) IBOutlet NSButton *mStartParseButton;
 @property (weak) IBOutlet NSProgressIndicator *mParserCircleProgress;
 
+@property (weak) IBOutlet MKMapView *mGPXMapView;
 @property (weak) IBOutlet NSTableView *mGPXTableView;
 @property (nonatomic, assign) long numberOfRows;
 @property (nonatomic, assign) NSArray * allTracks;

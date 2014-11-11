@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B17" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.MapKitIBPlugin" version="6250"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -314,12 +315,11 @@
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="列表" identifier="1" id="dJv-WI-2jE">
-                                        <view key="view" ambiguous="YES" id="Eop-vn-JMX">
-                                            <rect key="frame" x="10" y="33" width="445" height="244"/>
+                                        <view key="view" id="Eop-vn-JMX">
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDk-Ly-alq">
-                                                    <rect key="frame" x="-3" y="-3" width="451" height="246"/>
+                                                    <rect key="frame" x="-3" y="-247" width="451" height="246"/>
                                                     <clipView key="contentView" ambiguous="YES" misplaced="YES" id="paT-cD-J3e">
                                                         <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -516,12 +516,23 @@
                                         </view>
                                     </tabViewItem>
                                     <tabViewItem label="地图" identifier="2" id="CRx-Mo-r52">
-                                        <view key="view" id="qNU-Cb-bnW">
+                                        <view key="view" ambiguous="YES" id="qNU-Cb-bnW">
                                             <rect key="frame" x="10" y="33" width="445" height="244"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <mapView fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="L1r-6S-Tch">
+                                                    <rect key="frame" x="0.0" y="0.0" width="451" height="244"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="XfG-lQ-9wD" id="wB1-bb-pwV"/>
+                                                    </connections>
+                                                </mapView>
+                                            </subviews>
                                         </view>
                                     </tabViewItem>
                                 </tabViewItems>
+                                <connections>
+                                    <outlet property="delegate" destination="XfG-lQ-9wD" id="4li-OG-5lw"/>
+                                </connections>
                             </tabView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IuJ-nz-7la">
                                 <rect key="frame" x="18" y="316" width="58" height="17"/>
@@ -592,6 +603,7 @@
                     <connections>
                         <outlet property="mCreatorTextField" destination="Kfa-ze-8zD" id="rhv-dV-8fU"/>
                         <outlet property="mElevationGainTextField" destination="OAC-0v-DNe" id="xi8-m7-7XU"/>
+                        <outlet property="mGPXMapView" destination="L1r-6S-Tch" id="vki-Of-j5M"/>
                         <outlet property="mGPXTableView" destination="UVo-p6-EjR" id="vNB-4x-X0l"/>
                         <outlet property="mLengthTextField" destination="FvU-99-Wdz" id="YLX-ib-lwS"/>
                         <outlet property="mParseStateInfoLabel" destination="ROY-gf-fAh" id="D7w-jW-fYy"/>
