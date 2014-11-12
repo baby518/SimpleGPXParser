@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "GPXParser.h"
 
 @implementation ViewController
 
@@ -26,6 +25,26 @@
     _currentTrackPoints = [NSMutableArray array];
 
     _parserCallBackMode = PARSER_CALLBACK_MODE_JUST_RESULT;
+
+    // ++++++ not work, need developer id.
+    [_mGPXMapView setMapType:MKMapTypeStandard];
+    _mGPXMapView.showsUserLocation = YES;
+    _mGPXMapView.delegate = self;
+
+    CLLocationCoordinate2D theCoordinate;
+    theCoordinate.latitude=21.238928;
+    theCoordinate.longitude=113.313353;
+
+    MKCoordinateSpan theSpan;
+    theSpan.latitudeDelta=0.1;
+    theSpan.longitudeDelta=0.1;
+
+    MKCoordinateRegion theRegion;
+    theRegion.center=theCoordinate;
+    theRegion.span=theSpan;
+
+    [_mGPXMapView setRegion:theRegion];
+    // ------
 }
 
 - (void)setRepresentedObject:(id)representedObject {

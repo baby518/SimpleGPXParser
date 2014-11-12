@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B17" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B23" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
         <plugIn identifier="com.apple.MapKitIBPlugin" version="6250"/>
@@ -315,7 +315,7 @@
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="列表" identifier="1" id="dJv-WI-2jE">
-                                        <view key="view" id="Eop-vn-JMX">
+                                        <view key="view" ambiguous="YES" id="Eop-vn-JMX">
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDk-Ly-alq">
@@ -516,7 +516,7 @@
                                         </view>
                                     </tabViewItem>
                                     <tabViewItem label="地图" identifier="2" id="CRx-Mo-r52">
-                                        <view key="view" ambiguous="YES" id="qNU-Cb-bnW">
+                                        <view key="view" id="qNU-Cb-bnW">
                                             <rect key="frame" x="10" y="33" width="445" height="244"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
