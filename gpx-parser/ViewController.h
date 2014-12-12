@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <MapKit/MapKit.h>
 #import "GPXParser.h"
+#import "NSGPXParser.h"
 
 @interface ViewController : NSViewController <GPXParserDelegate, NSTableViewDataSource, NSTableViewDelegate, MKMapViewDelegate> {
     NSData *mData;

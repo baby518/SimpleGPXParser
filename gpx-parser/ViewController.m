@@ -71,10 +71,13 @@
     [self removeAllObjectsOfTable];
 
     if (mData != nil) {
-        GPXParser *gpxParser = [[GPXParser alloc] initWithData:mData];
-        gpxParser.delegate = self;
-        gpxParser.callbackMode = _parserCallBackMode;
-        [gpxParser parserAllElements];
+//        GPXParser *gpxParser = [[GPXParser alloc] initWithData:mData];
+//        gpxParser.delegate = self;
+//        gpxParser.callbackMode = _parserCallBackMode;
+//        [gpxParser parserAllElements];
+
+        NSGPXParser *gpxParser = [[NSGPXParser alloc] initWithData:mData];
+        [gpxParser satrtParser];
     }
 }
 
@@ -111,7 +114,13 @@
     return result;
 }
 
+- (void)removeAllObjectsOfTable {
+    [_currentTrackPoints removeAllObjects];
+    _numberOfRows = 0;
+    [_mGPXTableView reloadData];
+}
 
+#pragma mark - GPXParserDelegate
 - (void)rootCreatorDidParser:(NSString *)creator {
     NSLog(@"rootCreatorDidParser from GPXParserDelegate. %@", creator);
     [_mCreatorTextField setStringValue:creator];
@@ -185,12 +194,7 @@
     }
 }
 
-- (void)removeAllObjectsOfTable {
-    [_currentTrackPoints removeAllObjects];
-    _numberOfRows = 0;
-    [_mGPXTableView reloadData];
-}
-
+#pragma mark - NSTableViewDelegate
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     // Get a new ViewCell
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
