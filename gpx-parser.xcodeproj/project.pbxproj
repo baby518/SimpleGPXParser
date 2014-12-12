@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		A8E2B18A541CB36EAF729D15 /* TrackSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E2BABFD8B33F61434E62F6 /* TrackSegment.m */; };
 		A8E2B599A5DF1905CFAD95E7 /* Track.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E2BCE4BFFDA02E0DDAB2C0 /* Track.m */; };
-		A8E2B64F6250066A45349B5D /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E2BC072A58495E14E83251 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A8E2B7B1E139FFF07DAB4962 /* TrackPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E2BE132ABF4EC6BF70FAB4 /* TrackPoint.m */; };
 		A8E2B7E2058C19D9B79B96DF /* GPXSchema.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E2B542CBF184E3B1663AD7 /* GPXSchema.m */; };
-		A8E2BE65D54CD8F2BD16496D /* GPXParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E2B25734A9D0D1FA0AB4BC /* GPXParser.m */; };
 		D4CC64011A1256C100D13B58 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CC64001A1256C100D13B58 /* MapKit.framework */; };
+		D4D3E1E01A3B335100531DDF /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D3E1DD1A3B335100531DDF /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D4D3E1E11A3B335100531DDF /* GPXParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D3E1DF1A3B335100531DDF /* GPXParser.m */; };
+		D4D3E1E61A3B34BB00531DDF /* NSGPXParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D3E1E51A3B34BB00531DDF /* NSGPXParser.m */; };
 		D4D40DB8199FBED90060F812 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DB7199FBED90060F812 /* main.m */; };
 		D4D40DBB199FBED90060F812 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DBA199FBED90060F812 /* ViewController.m */; };
 		D4D40DBE199FBED90060F812 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D40DBD199FBED90060F812 /* AppDelegate.m */; };
@@ -34,20 +35,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A8E2B25734A9D0D1FA0AB4BC /* GPXParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXParser.m; sourceTree = "<group>"; };
 		A8E2B2E2F56F2A2FB727B403 /* TrackSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackSegment.h; sourceTree = "<group>"; };
 		A8E2B4751DA217EB26779B59 /* Track.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Track.h; sourceTree = "<group>"; };
 		A8E2B542CBF184E3B1663AD7 /* GPXSchema.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXSchema.m; sourceTree = "<group>"; };
 		A8E2B6843B8988CFC99B4E0A /* GPXLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXLog.h; sourceTree = "<group>"; };
 		A8E2BABFD8B33F61434E62F6 /* TrackSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackSegment.m; sourceTree = "<group>"; };
-		A8E2BB7059F6E328EEBEC8AD /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
-		A8E2BC072A58495E14E83251 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		A8E2BCE4BFFDA02E0DDAB2C0 /* Track.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Track.m; sourceTree = "<group>"; };
 		A8E2BD449F54BBFD8CB35270 /* TrackPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackPoint.h; sourceTree = "<group>"; };
 		A8E2BE132ABF4EC6BF70FAB4 /* TrackPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackPoint.m; sourceTree = "<group>"; };
 		A8E2BE95141E6CC5B7100A54 /* GPXSchema.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXSchema.h; sourceTree = "<group>"; };
-		A8E2BF4DBD297711093289C9 /* GPXParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXParser.h; sourceTree = "<group>"; };
 		D4CC64001A1256C100D13B58 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D4D3E1DC1A3B335100531DDF /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		D4D3E1DD1A3B335100531DDF /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		D4D3E1DE1A3B335100531DDF /* GPXParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXParser.h; sourceTree = "<group>"; };
+		D4D3E1DF1A3B335100531DDF /* GPXParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXParser.m; sourceTree = "<group>"; };
+		D4D3E1E41A3B34BB00531DDF /* NSGPXParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSGPXParser.h; sourceTree = "<group>"; };
+		D4D3E1E51A3B34BB00531DDF /* NSGPXParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSGPXParser.m; sourceTree = "<group>"; };
 		D4D40DB2199FBED90060F812 /* gpx-parser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gpx-parser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4D40DB6199FBED90060F812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4D40DB7199FBED90060F812 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -83,15 +86,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A8E2BC4D6447C35406A68054 /* GDataXML */ = {
+		D4D3E1DB1A3B335100531DDF /* GDataXML */ = {
 			isa = PBXGroup;
 			children = (
-				A8E2B25734A9D0D1FA0AB4BC /* GPXParser.m */,
-				A8E2BF4DBD297711093289C9 /* GPXParser.h */,
-				A8E2BC072A58495E14E83251 /* GDataXMLNode.m */,
-				A8E2BB7059F6E328EEBEC8AD /* GDataXMLNode.h */,
+				D4D3E1DC1A3B335100531DDF /* GDataXMLNode.h */,
+				D4D3E1DD1A3B335100531DDF /* GDataXMLNode.m */,
+				D4D3E1DE1A3B335100531DDF /* GPXParser.h */,
+				D4D3E1DF1A3B335100531DDF /* GPXParser.m */,
 			);
-			name = GDataXML;
+			path = GDataXML;
+			sourceTree = "<group>";
+		};
+		D4D3E1E31A3B34BB00531DDF /* NSXML */ = {
+			isa = PBXGroup;
+			children = (
+				D4D3E1E41A3B34BB00531DDF /* NSGPXParser.h */,
+				D4D3E1E51A3B34BB00531DDF /* NSGPXParser.m */,
+			);
+			path = NSXML;
 			sourceTree = "<group>";
 		};
 		D4D40DA9199FBED90060F812 = {
@@ -158,7 +170,8 @@
 		D4D40DEA199FC1730060F812 /* gpx-parser-function */ = {
 			isa = PBXGroup;
 			children = (
-				A8E2BC4D6447C35406A68054 /* GDataXML */,
+				D4D3E1E31A3B34BB00531DDF /* NSXML */,
+				D4D3E1DB1A3B335100531DDF /* GDataXML */,
 				A8E2B542CBF184E3B1663AD7 /* GPXSchema.m */,
 				A8E2BE95141E6CC5B7100A54 /* GPXSchema.h */,
 				A8E2B6843B8988CFC99B4E0A /* GPXLog.h */,
@@ -271,13 +284,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4D3E1E11A3B335100531DDF /* GPXParser.m in Sources */,
 				D4D40DBB199FBED90060F812 /* ViewController.m in Sources */,
 				D4D40DB8199FBED90060F812 /* main.m in Sources */,
 				D4D40DBE199FBED90060F812 /* AppDelegate.m in Sources */,
 				A8E2B7E2058C19D9B79B96DF /* GPXSchema.m in Sources */,
+				D4D3E1E01A3B335100531DDF /* GDataXMLNode.m in Sources */,
 				A8E2B7B1E139FFF07DAB4962 /* TrackPoint.m in Sources */,
-				A8E2BE65D54CD8F2BD16496D /* GPXParser.m in Sources */,
-				A8E2B64F6250066A45349B5D /* GDataXMLNode.m in Sources */,
+				D4D3E1E61A3B34BB00531DDF /* NSGPXParser.m in Sources */,
 				A8E2B599A5DF1905CFAD95E7 /* Track.m in Sources */,
 				A8E2B18A541CB36EAF729D15 /* TrackSegment.m in Sources */,
 			);
