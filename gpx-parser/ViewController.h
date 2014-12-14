@@ -11,7 +11,7 @@
 #import "GPXParser.h"
 #import "NSGPXParser.h"
 
-@interface ViewController : NSViewController <GPXParserDelegate, NSTableViewDataSource, NSTableViewDelegate, MKMapViewDelegate> {
+@interface ViewController : NSViewController <NSGPXParserDelegate, GPXParserDelegate, NSTableViewDataSource, NSTableViewDelegate, MKMapViewDelegate> {
     NSData *mData;
 }
 

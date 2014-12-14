@@ -7,12 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GPXSchema.h"
 #import "GPXLog.h"
+
+/** @author zhangchao
+*  @since 2014-10-27
+*  @data 2014-10-27
+*  @brief Delegate for View.*/
+@protocol NSGPXParserDelegate <NSObject>
+@optional
+- (void)onErrorWhenParser:(int)errorCode;
+- (void)rootCreatorDidParser:(NSString *)creator;
+- (void)rootVersionDidParser:(NSString *)version;
+@end
 
 @interface NSGPXParser : NSObject <NSXMLParserDelegate>
 
+@property(nonatomic, assign) id <NSGPXParserDelegate> delegate;
 @property(nonatomic, strong) NSXMLParser *gpxParser;
 @property(nonatomic, strong, readonly) NSData *mXMLData;
+@property(nonatomic, assign, readonly) bool isNeedCheckRootElement;
 
 - (id)initWithData:(NSData *)data;
 

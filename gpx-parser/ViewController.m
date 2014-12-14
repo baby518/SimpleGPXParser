@@ -77,6 +77,7 @@
 //        [gpxParser parserAllElements];
 
         NSGPXParser *gpxParser = [[NSGPXParser alloc] initWithData:mData];
+        gpxParser.delegate = self;
         [gpxParser satrtParser];
     }
 }
@@ -120,7 +121,7 @@
     [_mGPXTableView reloadData];
 }
 
-#pragma mark - GPXParserDelegate
+#pragma mark - GPXParserDelegate or NSGPXParserDelegate
 - (void)rootCreatorDidParser:(NSString *)creator {
     NSLog(@"rootCreatorDidParser from GPXParserDelegate. %@", creator);
     [_mCreatorTextField setStringValue:creator];
