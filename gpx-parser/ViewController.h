@@ -25,6 +25,7 @@
 @property (weak) IBOutlet NSProgressIndicator *mParserProgress;
 @property (weak) IBOutlet NSButton *mStartParseButton;
 @property (weak) IBOutlet NSProgressIndicator *mParserCircleProgress;
+@property (weak) IBOutlet NSPopUpButtonCell *mParserPopupMenu;
 
 @property (weak) IBOutlet MKMapView *mGPXMapView;
 @property (weak) IBOutlet NSTableView *mGPXTableView;
@@ -40,5 +41,6 @@
 - (NSData *)loadDataFromFile:(NSString *)path;
 
 - (void)removeAllObjectsOfTable;
+- (void)clearUIContents;
 @end
 

@@ -56,29 +56,33 @@
     NSLog(@"Button CLicked.");
 
     NSString *path = [self getFilePathFromDialog];
-    if (path != nil) {
-        // show path in Text Field.
-        [_mPathTextField setStringValue:path];
-        [_mParseStateInfoLabel setStringValue:@""];
-        [_mParserProgress setDoubleValue:0];
-        [_mParserCircleProgress setDoubleValue:0];
-    }
+    // show path in Text Field.
+    [_mPathTextField setStringValue:(path != nil) ? path : @""];
+    [_mParseStateInfoLabel setStringValue:@""];
+    [_mParserProgress setDoubleValue:0];
+    [_mParserCircleProgress setDoubleValue:0];
+
     mData = [self loadDataFromFile:path];
-    if (mData != nil) [_mStartParseButton setEnabled:true];
+    [_mStartParseButton setEnabled:(mData != nil)];
 }
 
 - (IBAction)startParserButtonPressed:(NSButton *)sender {
     [self removeAllObjectsOfTable];
+    [self clearUIContents];
 
     if (mData != nil) {
-//        GPXParser *gpxParser = [[GPXParser alloc] initWithData:mData];
-//        gpxParser.delegate = self;
-//        gpxParser.callbackMode = _parserCallBackMode;
-//        [gpxParser parserAllElements];
-
-        NSGPXParser *gpxParser = [[NSGPXParser alloc] initWithData:mData];
-        gpxParser.delegate = self;
-        [gpxParser satrtParser];
+        if ([_mParserPopupMenu indexOfSelectedItem] == 0) {
+            NSLog(@"startParserButtonPressed use GDataXML.");
+            GPXParser *gpxParser = [[GPXParser alloc] initWithData:mData];
+            gpxParser.delegate = self;
+            gpxParser.callbackMode = _parserCallBackMode;
+            [gpxParser parserAllElements];
+        } else if ([_mParserPopupMenu indexOfSelectedItem] == 1) {
+            NSLog(@"startParserButtonPressed use NSXML.");
+            NSGPXParser *gpxParser = [[NSGPXParser alloc] initWithData:mData];
+            gpxParser.delegate = self;
+            [gpxParser satrtParser];
+        }
     }
 }
 
@@ -107,7 +111,8 @@
     NSString *result = nil;
 
 // single selection
-    if ([openPanel runModal] == NSModalResponseOK) {
+    int modalResponse = [openPanel runModal];
+    if (modalResponse == NSModalResponseOK) {
         result = [[openPanel URLs] objectAtIndex:0];
     }
 
@@ -119,6 +124,14 @@
     [_currentTrackPoints removeAllObjects];
     _numberOfRows = 0;
     [_mGPXTableView reloadData];
+}
+
+- (void)clearUIContents {
+    [_mCreatorTextField setStringValue:@""];
+    [_mVersionTextField setStringValue:@""];
+    [_mLengthTextField setStringValue:@""];
+    [_mTotalTimeTextField setStringValue:@""];
+    [_mElevationGainTextField setStringValue:@""];
 }
 
 #pragma mark - GPXParserDelegate or NSGPXParserDelegate

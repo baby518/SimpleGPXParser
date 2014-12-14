@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B23" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
-        <plugIn identifier="com.apple.MapKitIBPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.MapKitIBPlugin" version="6254"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -258,14 +258,13 @@
                             </textField>
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xcp-Vd-vX2">
                                 <rect key="frame" x="87" y="404" width="147" height="26"/>
-                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="ZdV-6H-ScN" id="yTA-uh-sa8">
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yTA-uh-sa8">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="X24-tw-gU0">
+                                    <menu key="menu" title="Parser Function" id="X24-tw-gU0">
                                         <items>
-                                            <menuItem title="Item 1" state="on" id="ZdV-6H-ScN"/>
-                                            <menuItem title="Item 2" id="XUe-3V-QrU"/>
-                                            <menuItem title="Item 3" id="G2j-2s-5uD"/>
+                                            <menuItem title="GDataXML" state="on" id="ZdV-6H-ScN"/>
+                                            <menuItem title="NSXML" id="XUe-3V-QrU"/>
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
@@ -315,12 +314,12 @@
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="列表" identifier="1" id="dJv-WI-2jE">
-                                        <view key="view" ambiguous="YES" id="Eop-vn-JMX">
+                                        <view key="view" id="Eop-vn-JMX">
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDk-Ly-alq">
                                                     <rect key="frame" x="-3" y="-247" width="451" height="246"/>
-                                                    <clipView key="contentView" ambiguous="YES" misplaced="YES" id="paT-cD-J3e">
+                                                    <clipView key="contentView" misplaced="YES" id="paT-cD-J3e">
                                                         <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
@@ -608,6 +607,7 @@
                         <outlet property="mLengthTextField" destination="FvU-99-Wdz" id="YLX-ib-lwS"/>
                         <outlet property="mParseStateInfoLabel" destination="ROY-gf-fAh" id="D7w-jW-fYy"/>
                         <outlet property="mParserCircleProgress" destination="cix-J8-eex" id="6Hq-Ap-TLf"/>
+                        <outlet property="mParserPopupMenu" destination="yTA-uh-sa8" id="c6D-xF-5JA"/>
                         <outlet property="mParserProgress" destination="nhA-Yy-STF" id="jHE-VP-1jT"/>
                         <outlet property="mPathTextField" destination="QVx-ca-Ajw" id="Ds4-19-5sL"/>
                         <outlet property="mStartParseButton" destination="YSv-RO-nsr" id="uMX-S1-5dc"/>
