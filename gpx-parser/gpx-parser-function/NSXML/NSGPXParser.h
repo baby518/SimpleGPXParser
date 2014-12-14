@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TrackPoint.h"
+#import "TrackSegment.h"
+#import "Track.h"
 #import "GPXSchema.h"
 #import "GPXLog.h"
 
@@ -16,9 +19,10 @@
 *  @brief Delegate for View.*/
 @protocol NSGPXParserDelegate <NSObject>
 @optional
-- (void)onErrorWhenParser:(int)errorCode;
+- (void)onErrorWhenParser:(NSInteger)errorCode;
 - (void)rootCreatorDidParser:(NSString *)creator;
 - (void)rootVersionDidParser:(NSString *)version;
+- (void)allTracksDidParser:(NSArray *)tracks;
 @end
 
 @interface NSGPXParser : NSObject <NSXMLParserDelegate>
@@ -27,6 +31,12 @@
 @property(nonatomic, strong) NSXMLParser *gpxParser;
 @property(nonatomic, strong, readonly) NSData *mXMLData;
 @property(nonatomic, assign, readonly) bool isNeedCheckRootElement;
+@property(nonatomic, assign, readonly) bool storingCharacters;
+@property(nonatomic, assign, readonly) NSString *currentElement;
+@property(nonatomic, strong, readonly) TrackPoint *currentTrackPoint;
+@property(nonatomic, strong, readonly) TrackSegment *currentTrackSegment;
+@property(nonatomic, strong, readonly) Track *currentTrack;
+@property(nonatomic, strong, readonly) NSMutableArray *mAllTracks;
 
 - (id)initWithData:(NSData *)data;
 

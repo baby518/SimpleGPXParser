@@ -16,13 +16,16 @@
         unsigned long size = [data length];
         LOGD(@"initWithData size : %lu Byte, %lu KB", size, size / 1024);
         _mXMLData = data;
+        _currentElement = @"";
+        _mAllTracks = [NSMutableArray array];
     }
     return self;
 }
 
 - (void)satrtParser {
     LOGD(@"satrtParser");
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//    dispatch_async(dispatch_get_main_queue(), ^{
         _isNeedCheckRootElement = true;
         _gpxParser = [[NSXMLParser alloc] initWithData:_mXMLData];
         _gpxParser.delegate = self;
@@ -79,7 +82,26 @@
         });
     } else if ([elementName isEqualToString:ELEMENT_ROUTE]) {
 
+    } else if ([elementName isEqualToString:ELEMENT_TRACK]) {
+        _currentTrack = [[Track alloc] init];
+    } else if ([elementName isEqualToString:ELEMENT_TRACK_SEGMENT]) {
+        _currentTrackSegment = [[TrackSegment alloc] init];
+    } else if ([elementName isEqualToString:ELEMENT_TRACK_POINT]) {
+        //获取 trkpt 节点下的 lat 和 lon 属性
+        double lat = [attributeDict[ATTRIBUTE_TRACK_POINT_LATITUDE] doubleValue];
+        double lon = [attributeDict[ATTRIBUTE_TRACK_POINT_LONGITUDE] doubleValue];
+        LOGD(@"track Point is: (%f, %f)", lat, lon);
+        _currentTrackPoint = [[TrackPoint alloc] initWithTrack:lat :lon :0 :nil];
+    } else if ([elementName isEqualToString:ELEMENT_ROUTE_POINT]) {
+        if ([_currentElement isEqualToString:ELEMENT_ROUTE]) {
+            //获取 rtept 节点下的 lat 和 lon 属性
+            NSString *lat = attributeDict[ATTRIBUTE_TRACK_POINT_LATITUDE];
+            NSString *lon = attributeDict[ATTRIBUTE_TRACK_POINT_LONGITUDE];
+            LOGD(@"route Point is: (%@, %@)", lat, lon);
+        }
     }
+    _currentElement = elementName;
+    _storingCharacters = true;
 }
 
 /*
@@ -87,6 +109,31 @@
  */
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     LOGD(@"didEndElement elementName : %@", elementName);
+
+//    if ([_currentElement isEqualToString:elementName]) {
+//        _currentElement = @"";
+//    }
+
+    if ([elementName isEqualToString:ELEMENT_TRACK_POINT]) {
+        NSLog(@"didEndElement _currentTrackPoint : (%f, %f) %f time : %@",
+                _currentTrackPoint.getLocation.coordinate.latitude,
+                _currentTrackPoint.getLocation.coordinate.longitude,
+                _currentTrackPoint.getLocation.altitude,
+                [GPXSchema convertTime2String:_currentTrackPoint.getLocation.timestamp]);
+        [_currentTrackSegment addTrackpoint:_currentTrackPoint];
+        _currentTrackPoint = nil;
+    } else if ([elementName isEqualToString:ELEMENT_TRACK_SEGMENT]) {
+        [_currentTrack addTrackSegment:_currentTrackSegment];
+        _currentTrackSegment = nil;
+    } else if ([elementName isEqualToString:ELEMENT_TRACK]) {
+        [_mAllTracks addObject:_currentTrack];
+        _currentTrack = nil;
+    } else if ([elementName isEqualToString:ROOT_NAME]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_delegate allTracksDidParser:_mAllTracks];
+        });
+    }
+    _storingCharacters = false;
 }
 
 /*
@@ -95,10 +142,27 @@
  * you should append it to the current accumulation of characters until the element changes.
  */
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
+    if (!_storingCharacters) return;
     // almost \n and TAB
 //    if (string.length > 0) {
-        LOGD(@"foundCharacters : %@, length : %d", string, string.length);
+//        LOGD(@"foundCharacters : %@, length : %d", string, string.length);
 //    }
+
+    if ([_currentElement isEqualToString:ELEMENT_TRACK_POINT_ELEVATION]) {
+        _currentTrackPoint.elevation = [string doubleValue];
+        NSLog(@"foundCharacters _currentTrackPoint : (%f, %f) %f time : %@",
+                _currentTrackPoint.getLocation.coordinate.latitude,
+                _currentTrackPoint.getLocation.coordinate.longitude,
+                _currentTrackPoint.getLocation.altitude,
+                [GPXSchema convertTime2String:_currentTrackPoint.getLocation.timestamp]);
+    } else if ([_currentElement isEqualToString:ELEMENT_TRACK_POINT_TIME]) {
+        _currentTrackPoint.time = [GPXSchema convertString2Time:string];
+        NSLog(@"foundCharacters _currentTrackPoint : (%f, %f) %f time : %@",
+                _currentTrackPoint.getLocation.coordinate.latitude,
+                _currentTrackPoint.getLocation.coordinate.longitude,
+                _currentTrackPoint.getLocation.altitude,
+                [GPXSchema convertTime2String:_currentTrackPoint.getLocation.timestamp]);
+    }
 }
 
 @end
