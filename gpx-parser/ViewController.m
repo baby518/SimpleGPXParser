@@ -27,23 +27,23 @@
     _parserCallBackMode = PARSER_CALLBACK_MODE_JUST_RESULT;
 
     // ++++++ not work, need developer id.
-    [_mGPXMapView setMapType:MKMapTypeStandard];
-    _mGPXMapView.showsUserLocation = YES;
-    _mGPXMapView.delegate = self;
-
-    CLLocationCoordinate2D theCoordinate;
-    theCoordinate.latitude=21.238928;
-    theCoordinate.longitude=113.313353;
-
-    MKCoordinateSpan theSpan;
-    theSpan.latitudeDelta=0.1;
-    theSpan.longitudeDelta=0.1;
-
-    MKCoordinateRegion theRegion;
-    theRegion.center=theCoordinate;
-    theRegion.span=theSpan;
-
-    [_mGPXMapView setRegion:theRegion];
+//    [_mGPXMapView setMapType:MKMapTypeStandard];
+//    _mGPXMapView.showsUserLocation = YES;
+//    _mGPXMapView.delegate = self;
+//
+//    CLLocationCoordinate2D theCoordinate;
+//    theCoordinate.latitude=21.238928;
+//    theCoordinate.longitude=113.313353;
+//
+//    MKCoordinateSpan theSpan;
+//    theSpan.latitudeDelta=0.1;
+//    theSpan.longitudeDelta=0.1;
+//
+//    MKCoordinateRegion theRegion;
+//    theRegion.center=theCoordinate;
+//    theRegion.span=theSpan;
+//
+//    [_mGPXMapView setRegion:theRegion];
     // ------
 }
 
@@ -72,16 +72,16 @@
 
     if (mData != nil) {
         if ([_mParserPopupMenu indexOfSelectedItem] == 0) {
+            NSLog(@"startParserButtonPressed use NSXML.");
+            NSGPXParser *gpxParser = [[NSGPXParser alloc] initWithData:mData];
+            gpxParser.delegate = self;
+            [gpxParser satrtParser];
+        } else if ([_mParserPopupMenu indexOfSelectedItem] == 1) {
             NSLog(@"startParserButtonPressed use GDataXML.");
             GPXParser *gpxParser = [[GPXParser alloc] initWithData:mData];
             gpxParser.delegate = self;
             gpxParser.callbackMode = _parserCallBackMode;
             [gpxParser parserAllElements];
-        } else if ([_mParserPopupMenu indexOfSelectedItem] == 1) {
-            NSLog(@"startParserButtonPressed use NSXML.");
-            NSGPXParser *gpxParser = [[NSGPXParser alloc] initWithData:mData];
-            gpxParser.delegate = self;
-            [gpxParser satrtParser];
         }
     }
 }
