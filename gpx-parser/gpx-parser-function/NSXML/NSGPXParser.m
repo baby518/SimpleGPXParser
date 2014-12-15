@@ -115,7 +115,7 @@
 //    }
 
     if ([elementName isEqualToString:ELEMENT_TRACK_POINT]) {
-        NSLog(@"didEndElement _currentTrackPoint : (%f, %f) %f time : %@",
+        LOGD(@"didEndElement _currentTrackPoint : (%f, %f) %f time : %@",
                 _currentTrackPoint.getLocation.coordinate.latitude,
                 _currentTrackPoint.getLocation.coordinate.longitude,
                 _currentTrackPoint.getLocation.altitude,
@@ -143,25 +143,11 @@
  */
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     if (!_storingCharacters) return;
-    // almost \n and TAB
-//    if (string.length > 0) {
-//        LOGD(@"foundCharacters : %@, length : %d", string, string.length);
-//    }
 
     if ([_currentElement isEqualToString:ELEMENT_TRACK_POINT_ELEVATION]) {
         _currentTrackPoint.elevation = [string doubleValue];
-        NSLog(@"foundCharacters _currentTrackPoint : (%f, %f) %f time : %@",
-                _currentTrackPoint.getLocation.coordinate.latitude,
-                _currentTrackPoint.getLocation.coordinate.longitude,
-                _currentTrackPoint.getLocation.altitude,
-                [GPXSchema convertTime2String:_currentTrackPoint.getLocation.timestamp]);
     } else if ([_currentElement isEqualToString:ELEMENT_TRACK_POINT_TIME]) {
         _currentTrackPoint.time = [GPXSchema convertString2Time:string];
-        NSLog(@"foundCharacters _currentTrackPoint : (%f, %f) %f time : %@",
-                _currentTrackPoint.getLocation.coordinate.latitude,
-                _currentTrackPoint.getLocation.coordinate.longitude,
-                _currentTrackPoint.getLocation.altitude,
-                [GPXSchema convertTime2String:_currentTrackPoint.getLocation.timestamp]);
     }
 }
 

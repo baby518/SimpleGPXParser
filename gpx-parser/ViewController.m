@@ -58,16 +58,13 @@
     NSString *path = [self getFilePathFromDialog];
     // show path in Text Field.
     [_mPathTextField setStringValue:(path != nil) ? path : @""];
-    [_mParseStateInfoLabel setStringValue:@""];
-    [_mParserProgress setDoubleValue:0];
-    [_mParserCircleProgress setDoubleValue:0];
+    if (path != nil) [self clearUIContents];
 
     mData = [self loadDataFromFile:path];
     [_mStartParseButton setEnabled:(mData != nil)];
 }
 
 - (IBAction)startParserButtonPressed:(NSButton *)sender {
-    [self removeAllObjectsOfTable];
     [self clearUIContents];
 
     if (mData != nil) {
@@ -127,6 +124,12 @@
 }
 
 - (void)clearUIContents {
+    [self removeAllObjectsOfTable];
+
+    [_mParseStateInfoLabel setStringValue:@""];
+    [_mParserProgress setDoubleValue:0];
+    [_mParserCircleProgress setDoubleValue:0];
+
     [_mCreatorTextField setStringValue:@""];
     [_mVersionTextField setStringValue:@""];
     [_mLengthTextField setStringValue:@""];
