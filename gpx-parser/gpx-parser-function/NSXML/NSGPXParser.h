@@ -1,5 +1,5 @@
 //
-//  NSObject+NSGPXParser.h
+//  NSGPXParser.h
 //  gpx-parser
 //
 //  Created by zhangchao on 14/12/12.

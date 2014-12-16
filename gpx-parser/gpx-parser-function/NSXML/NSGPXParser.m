@@ -1,5 +1,5 @@
 //
-//  NSObject+NSGPXParser.m
+//  NSGPXParser.m
 //  gpx-parser
 //
 //  Created by zhangchao on 14/12/12.
@@ -25,7 +25,6 @@
 - (void)satrtParser {
     LOGD(@"satrtParser");
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//    dispatch_async(dispatch_get_main_queue(), ^{
         _isNeedCheckRootElement = true;
         _gpxParser = [[NSXMLParser alloc] initWithData:_mXMLData];
         _gpxParser.delegate = self;
@@ -109,10 +108,6 @@
  */
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     LOGD(@"didEndElement elementName : %@", elementName);
-
-//    if ([_currentElement isEqualToString:elementName]) {
-//        _currentElement = @"";
-//    }
 
     if ([elementName isEqualToString:ELEMENT_TRACK_POINT]) {
         LOGD(@"didEndElement _currentTrackPoint : (%f, %f) %f time : %@",
