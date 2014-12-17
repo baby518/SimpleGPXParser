@@ -92,12 +92,10 @@
         LOGD(@"track Point is: (%f, %f)", lat, lon);
         _currentTrackPoint = [[TrackPoint alloc] initWithTrack:lat :lon :0 :nil];
     } else if ([elementName isEqualToString:ELEMENT_ROUTE_POINT]) {
-        if ([_currentElement isEqualToString:ELEMENT_ROUTE]) {
-            //获取 rtept 节点下的 lat 和 lon 属性
-            NSString *lat = attributeDict[ATTRIBUTE_TRACK_POINT_LATITUDE];
-            NSString *lon = attributeDict[ATTRIBUTE_TRACK_POINT_LONGITUDE];
-            LOGD(@"route Point is: (%@, %@)", lat, lon);
-        }
+        //获取 rtept 节点下的 lat 和 lon 属性
+        NSString *lat = attributeDict[ATTRIBUTE_TRACK_POINT_LATITUDE];
+        NSString *lon = attributeDict[ATTRIBUTE_TRACK_POINT_LONGITUDE];
+        LOGD(@"route Point is: (%@, %@)", lat, lon);
     }
     _currentElement = elementName;
     _storingCharacters = true;
