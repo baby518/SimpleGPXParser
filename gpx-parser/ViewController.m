@@ -174,6 +174,10 @@
 //    }
 }
 
+- (void)tracksBoundsDidParser:(CGRect)rect needFixIt:(bool)needFix {
+
+}
+
 - (void)trackDidParser:(Track *)track {
 //    if (track == nil) return;
     // if we want show some item while parsing data.

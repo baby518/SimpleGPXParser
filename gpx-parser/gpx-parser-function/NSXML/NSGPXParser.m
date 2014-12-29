@@ -13,6 +13,7 @@
 - (id)initWithData:(NSData *)data {
     self = [super self];
     if (self) {
+        _isNeedCancel = false;
         unsigned long size = [data length];
         LOGD(@"initWithData size : %lu Byte, %lu KB", size, size / 1024);
         _mXMLData = data;
@@ -33,6 +34,11 @@
         [_gpxParser setShouldResolveExternalEntities:YES];
         [_gpxParser parse];
     });
+}
+
+- (void)stopParser {
+    _isNeedCancel = true;
+    _delegate = nil;
 }
 
 #pragma mark - NSXMLParserDelegate
@@ -96,9 +102,23 @@
         NSString *lat = attributeDict[ATTRIBUTE_TRACK_POINT_LATITUDE];
         NSString *lon = attributeDict[ATTRIBUTE_TRACK_POINT_LONGITUDE];
         LOGD(@"route Point is: (%@, %@)", lat, lon);
+    } else if ([elementName isEqualToString:ELEMENT_METADATA_BOUNDS]) {
+        // metadata's bound.
+        double maxLat = [attributeDict[ATTRIBUTE_METADATA_BOUNDS_MAXLAT] doubleValue];
+        double maxLng = [attributeDict[ATTRIBUTE_METADATA_BOUNDS_MAXLNG] doubleValue];
+        double minLat = [attributeDict[ATTRIBUTE_METADATA_BOUNDS_MINLAT] doubleValue];
+        double minLng = [attributeDict[ATTRIBUTE_METADATA_BOUNDS_MINLNG] doubleValue];
+        LOGD(@"metadata bound is: (%f, %f) - (%f, %f)", maxLat, maxLng, minLat, minLng);
+        CGRect result = CGRectMake(minLat, minLng, maxLat - minLat, maxLng - minLng);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_delegate tracksBoundsDidParser:result needFixIt:false];
+        });
     }
     _currentElement = elementName;
     _storingCharacters = true;
+
+    // cancel it when need.
+    if (_isNeedCancel) [parser abortParsing];
 }
 
 /*
